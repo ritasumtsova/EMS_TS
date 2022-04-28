@@ -7,8 +7,6 @@ const Login: React.FC = () => {
   const fakeAuth = (): void => {
     setIsAuth(true);
     localStorage.setItem('TOKEN', 'TOKEN');
-    console.log(isAuth);
-    console.log(localStorage.getItem('TOKEN'));
   };
 
   if (isAuth) {
