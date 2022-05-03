@@ -1,5 +1,6 @@
+import { AxiosError, AxiosResponse } from 'axios';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -16,7 +17,7 @@ const Login: React.FC = () => {
   return (
     <>
       <h1>Login page</h1>
-      <button onClick={fakeAuth}>fake auth</button>
+      <button onClick={fakeAuth} type="button">fake auth</button>
     </>
   );
 };
