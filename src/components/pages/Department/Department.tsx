@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import DepartmentsAPI from '../../../API/Departments';
@@ -9,18 +9,20 @@ const Department: React.FC = () => {
   const [employees, setEmployees] = useState<IEmployee[]>();
 
   const getDepartmentInfo = async () => {
-    if (id) {
-      await DepartmentsAPI.getDepartmentInfo(id)
-        .then((res) => {
-          setEmployees(res.data.employees);
-        })
-        .catch((err) => console.log(err));
+    try {
+      const res = await DepartmentsAPI.getDepartmentInfo(id!);
+
+      setEmployees(res.data.employees);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  useEffect(() => {
-    getDepartmentInfo();
-  });
+  const departmentInfo = useMemo(() => {
+    return getDepartmentInfo();
+  }, [id])
+
+  useEffect(() => {}, [departmentInfo]);
 
   return (
     <>

@@ -1,29 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import DepartmentsAPI from '../../../API/Departments';
-import { IDepartments } from '../../../types/departments';
+import { IDepartment } from '../../../types/departments';
 
 const Departments: React.FC = () => {
-  const [departments, setDepartments] = useState<IDepartments>();
+  const [departments, setDepartments] = useState<IDepartment[]>();
 
   const getDepartments = async () => {
-    await DepartmentsAPI.getDepartments()
-      .then((res) => {
-        setDepartments(res.data);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await DepartmentsAPI.getDepartments();
+
+      setDepartments(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  useEffect(() => {
-    getDepartments();
-  });
+  const departmentsList = useMemo(() => {
+    return getDepartments();
+  }, [])
+
+  useEffect(() => {}, [departmentsList]);
 
   return (
     <>
       <h1>Departments page</h1>
       {departments
-        ? departments.data.map((department) => {
+        ? departments.map((department) => {
           return (
             <div key={department._id}>
               <Link to={`/departments/${department._id}`}>
@@ -33,7 +37,7 @@ const Departments: React.FC = () => {
             </div>
           );
         })
-        : <div>404</div>}
+        : <div>Departments not found</div>}
     </>
   );
 };
