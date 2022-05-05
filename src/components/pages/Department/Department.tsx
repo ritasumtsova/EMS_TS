@@ -27,7 +27,7 @@ const Department: React.FC = () => {
   return (
     <>
       <h1>Department page</h1>
-      {employees
+      {employees.length > 0
         ? employees.map((employee) => {
           return (
             <div key={employee._id}>
