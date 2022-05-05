@@ -19,7 +19,7 @@ const Departments: React.FC = () => {
 
   const departmentsList = useMemo(() => {
     return getDepartments();
-  }, [])
+  }, [departments])
 
   useEffect(() => {}, [departmentsList]);
 
