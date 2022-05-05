@@ -1,0 +1,22 @@
+.Departments {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 20px;
+  padding: 5px;
+  text-align: center;
+
+  &__btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__btn--link {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}

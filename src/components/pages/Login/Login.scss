@@ -1,0 +1,15 @@
+.Login__wrapper {
+  height: 100vh;
+  width: 100%;
+  max-width: 500px;
+  padding: 5px;
+  text-align: center;
+
+  &-inner {
+    margin-top: 80px;
+
+    &-form {
+      padding-top: 20px;
+    }
+  }
+}

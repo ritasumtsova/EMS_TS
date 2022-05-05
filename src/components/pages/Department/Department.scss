@@ -1,0 +1,16 @@
+.Department {
+  margin-top: 20px;
+  padding: 5px;
+  text-align: center;
+
+  &__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

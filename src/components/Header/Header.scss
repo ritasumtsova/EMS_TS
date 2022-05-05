@@ -1,0 +1,25 @@
+.Header {
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__info-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+
+    &:visited {
+      color: #fff;
+    }
+  }
+}
