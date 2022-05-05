@@ -6,7 +6,7 @@ import { IEmployee } from '../../../types/employees';
 
 const Department: React.FC = () => {
   const { id } = useParams();
-  const [employees, setEmployees] = useState<IEmployee[]>();
+  const [employees, setEmployees] = useState<IEmployee[]>([]);
 
   const getDepartmentInfo = async () => {
     try {

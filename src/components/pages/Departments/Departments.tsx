@@ -5,7 +5,7 @@ import DepartmentsAPI from '../../../API/Departments';
 import { IDepartment } from '../../../types/departments';
 
 const Departments: React.FC = () => {
-  const [departments, setDepartments] = useState<IDepartment[]>();
+  const [departments, setDepartments] = useState<IDepartment[]>([]);
 
   const getDepartments = async () => {
     try {
