@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Departments } from '../types/departments';
-import { Department } from '../types/departments';
+import { Department, Departments } from '../types/departments';
 
 const axios = require('axios');
 
@@ -13,12 +12,19 @@ const DepartmentsAPI = {
     },
   }),
 
-  getDepartments(): Promise<AxiosResponse<Departments>>{
+  getDepartments(): Promise<AxiosResponse<Departments>> {
     return DepartmentsAPI.CONFIG.get('/department');
   },
 
   getDepartmentInfo(id: string): Promise<AxiosResponse<Department>> {
     return DepartmentsAPI.CONFIG.get(`/department/${id}`);
+  },
+
+  addDepartment(name: string, description: string): Promise<AxiosResponse<Department>> {
+    return DepartmentsAPI.CONFIG.post('/department', {
+      name,
+      description,
+    });
   },
 };
 

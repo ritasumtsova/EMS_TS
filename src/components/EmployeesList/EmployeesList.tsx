@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  Button,
-  Col,
-  Container,
-} from 'reactstrap';
+import { Col, Container } from 'reactstrap';
 
 import { Employee } from '../../types/employees';
+import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import './EmployeesList.scss';
 
@@ -26,9 +23,7 @@ const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
               </Col>
               <Col className="EmployeesList__info-wrapper-btn">
                 <EditButton />
-                <Button color="danger" disabled>
-                  Delete
-                </Button>
+                <DeleteButton />
               </Col>
             </React.Fragment>
           );

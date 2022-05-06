@@ -3,6 +3,7 @@ import { Col, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+// import DepartmentsAPI from '../../API/Departments';
 import './AddButton.scss';
 
 interface AddButtonProps {
@@ -10,6 +11,14 @@ interface AddButtonProps {
 }
 
 const AddButton: React.FC<AddButtonProps> = ({ title }) => {
+  // const addDepartment = async () => {
+  //   try {
+  //     await DepartmentsAPI.addDepartment('test', 'description');
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
   return (
     <Col className="AddButton" xs="4">
       <Button
@@ -17,7 +26,7 @@ const AddButton: React.FC<AddButtonProps> = ({ title }) => {
         color="success"
         size="lg"
         block
-        disabled
+        // onClick={addDepartment}
       >
         <span>
           {title}

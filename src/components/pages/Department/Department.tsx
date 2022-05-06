@@ -4,9 +4,9 @@ import { Row } from 'reactstrap';
 
 import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
-import './Department.scss';
 import AddButton from '../../AddButton/AddButton';
 import EmployeesList from '../../EmployeesList/EmployeesList';
+import './Department.scss';
 
 const DepartmentPage: React.FC = () => {
   const { id } = useParams();

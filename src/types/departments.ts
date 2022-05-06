@@ -1,7 +1,7 @@
 import { Employee } from "./employees";
 
 export interface Department {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   employees?: Employee[];

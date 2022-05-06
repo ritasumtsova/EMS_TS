@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Col, Row } from 'reactstrap';
 
 import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
-import EditButton from '../../EditButton/EditButton';
-import './Departments.scss';
+import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 
 const Departments: React.FC = () => {
   const [departments, setDepartments] = useState<Department[]>([]);
@@ -28,27 +25,16 @@ const Departments: React.FC = () => {
   useEffect(() => {}, [departmentsList]);
 
   return (
-    <>
-      <AddButton title="Add department " />
+    <div>
       {departments.length > 0
-        ? departments.map((department) => {
-          return (
-            <Row key={department._id} className="Departments">
-              <Col>
-                <span className="Departments__name">{`${department.name} department`}</span>
-              </Col>
-              <Col className="Departments__btn-wrapper">
-                <Link to={`/departments/${department._id}`} className="Departments__btn--link">
-                  <Button color="success">Employees</Button>
-                </Link>
-                <EditButton />
-                <Button color="danger" disabled>Delete</Button>
-              </Col>
-            </Row>
-          );
-        })
+        ? (
+          <>
+            <AddButton title="Add department " />
+            <DepartmnetsList departments={departments} />
+          </>
+        )
         : <div>Departments not found</div>}
-    </>
+    </div>
   );
 };
 
