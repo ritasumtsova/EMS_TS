@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Button } from 'reactstrap';
-import { FontAwesomeIcon, Props } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './AddButton.scss';
@@ -28,6 +28,6 @@ const AddButton: React.FC<AddButtonProps> = ({ title }) => {
       </Button>
     </Col>
   );
-}
+};
 
 export default AddButton;

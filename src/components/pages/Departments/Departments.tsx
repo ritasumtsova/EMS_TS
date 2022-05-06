@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'reactstrap';
 
 import DepartmentsAPI from '../../../API/Departments';
-import { IDepartment } from '../../../types/departments';
+import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
 import EditButton from '../../EditButton/EditButton';
 import './Departments.scss';
 
 const Departments: React.FC = () => {
-  const [departments, setDepartments] = useState<IDepartment[]>([]);
+  const [departments, setDepartments] = useState<Department[]>([]);
 
   const getDepartments = async () => {
     try {
@@ -17,7 +17,7 @@ const Departments: React.FC = () => {
 
       setDepartments(res.data.data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

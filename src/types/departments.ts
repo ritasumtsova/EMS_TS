@@ -1,16 +1,12 @@
-import { IEmployee } from "./employees";
+import { Employee } from "./employees";
 
-export interface IDepartment {
+export interface Department {
   _id: string;
   name: string;
   description: string;
-  employees?: IEmployee[];
+  employees?: Employee[];
 }
 
-// export interface IDepartmentInfo {
-//   data: IDepartment;
-// }
-
-export interface IDepartments {
-  data: Array<IDepartment>;
+export interface Departments {
+  data: Array<Department>;
 }

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { IAuth } from '../types/auth';
+import { Auth } from '../types/auth';
 
 const axios = require('axios');
 
@@ -9,7 +9,7 @@ const AuthAPI = {
     baseURL: process.env.REACT_APP_BASEURL,
   }),
 
-  login(userName: string, password: string): Promise<AxiosResponse<IAuth>> {
+  login(userName: string, password: string): Promise<AxiosResponse<Auth>> {
     return AuthAPI.CONFIG.post('user/login', {
       userName,
       password,

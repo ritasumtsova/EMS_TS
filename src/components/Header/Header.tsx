@@ -9,7 +9,9 @@ const Header: React.FC = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_TOKEN!)) setIsAuth(true);
+    if (localStorage.getItem(process.env.REACT_APP_TOKEN!)) {
+      setIsAuth(true);
+    }
   });
 
   const title = isAuth

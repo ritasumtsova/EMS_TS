@@ -1,0 +1,10 @@
+.EmployeesList__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }

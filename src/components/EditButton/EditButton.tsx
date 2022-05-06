@@ -11,6 +11,6 @@ const EditButton: React.FC = () => {
       Edit
     </Button>
   );
-}
+};
 
 export default EditButton;
