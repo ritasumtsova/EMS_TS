@@ -17,6 +17,7 @@ const AddButton: React.FC<AddButtonProps> = ({ title }) => {
         color="success"
         size="lg"
         block
+        disabled
       >
         <span>
           {title}

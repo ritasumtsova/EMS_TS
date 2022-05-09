@@ -19,12 +19,14 @@ const Login: React.FC = () => {
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await AuthAPI.login(login, password)
-      .then((res) => {
-        localStorage.setItem(process.env.REACT_APP_TOKEN!, res.data.token);
-        setIsAuth(true);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await AuthAPI.login(login, password);
+
+      localStorage.setItem(process.env.REACT_APP_TOKEN!, res.data.token);
+      setIsAuth(true);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   if (isAuth) {
