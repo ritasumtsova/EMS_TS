@@ -1,0 +1,15 @@
+.EmployeeForm {
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  &__input {
+    margin: 10px;
+  }
+
+  &__btn {
+    padding: 15 30px;
+  }
+}

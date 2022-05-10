@@ -5,6 +5,7 @@ import { Col, Row, Button } from 'reactstrap';
 import { Department } from '../../types/departments';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
+import NotFound from '../pages/NotFound/NotFound';
 import './DepartmentsList.scss';
 
 interface DepartmentsListProps {
@@ -12,26 +13,28 @@ interface DepartmentsListProps {
 }
 
 const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
+  if (departments.length === 0) {
+    return <NotFound />;
+  }
+
   return (
     <div>
-      {departments.length > 0
-        ? departments.map((department) => {
-          return (
-            <Row key={department._id} className="Departments">
-              <Col>
-                <span className="Departments__name">{`${department.name} department`}</span>
-              </Col>
-              <Col className="Departments__btn-wrapper">
-                <Link to={`/departments/${department._id}`} className="Departments__btn--link">
-                  <Button color="success">Employees</Button>
-                </Link>
-                <EditButton />
-                <DeleteButton />
-              </Col>
-            </Row>
-          );
-        })
-        : <div>Departments not found</div>}
+      {departments.map((department) => {
+        return (
+          <Row key={department._id} className="Departments">
+            <Col>
+              <span className="Departments__name">{`${department.name} department`}</span>
+            </Col>
+            <Col className="Departments__btn-wrapper">
+              <Link to={`/departments/${department._id}`} className="Departments__btn--link">
+                <Button color="success">Employees</Button>
+              </Link>
+              <EditButton />
+              <DeleteButton />
+            </Col>
+          </Row>
+        );
+      })}
     </div>
   );
 };
