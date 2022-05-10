@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
 import PrivateRoute from './routes/PrivateRoute';
-import Error from './components/pages/Error/Error';
+import Error from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
 import Header from './components/Header/Header';
 import './App.scss';

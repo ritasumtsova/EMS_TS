@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
+import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 
 const Departments: React.FC = () => {
@@ -24,17 +25,15 @@ const Departments: React.FC = () => {
 
   useEffect(() => {}, [departmentsList]);
 
+  if (!departments) {
+    return <NotFound />;
+  }
+
   return (
-    <div>
-      {departments.length > 0
-        ? (
-          <>
-            <AddButton title="Add department " />
-            <DepartmnetsList departments={departments} />
-          </>
-        )
-        : <div>Departments not found</div>}
-    </div>
+    <>
+      <AddButton title="Add department " />
+      <DepartmnetsList departments={departments || []} />
+    </>
   );
 };
 
