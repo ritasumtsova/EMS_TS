@@ -6,6 +6,7 @@ import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
 import EmployeesList from '../../EmployeesList/EmployeesList';
+import NotFound from '../NotFound/NotFound';
 import './Department.scss';
 
 const DepartmentPage: React.FC = () => {
@@ -28,20 +29,18 @@ const DepartmentPage: React.FC = () => {
 
   useEffect(() => {}, [departmentInfo]);
 
+  if (!department) {
+    return <NotFound />;
+  }
+
   return (
-    <div>
-      {department
-        ? (
-          <>
-            <AddButton title="Add employee " />
-            <Row className="Department">
-              <h2>{department.description}</h2>
-              <EmployeesList employees={department.employees!} />
-            </Row>
-          </>
-        )
-        : <h1>smth went wrong</h1>}
-    </div>
+    <>
+      <AddButton title="Add employee " />
+      <Row className="Department">
+        <h2>{department.description}</h2>
+        <EmployeesList employees={department.employees || []} />
+      </Row>
+    </>
   );
 };
 
