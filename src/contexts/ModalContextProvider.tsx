@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 
-import ModalCtx from './ModalContext';
+import { Context } from './ModalContext';
 import ModalWindow from '../components/ModalWindow/ModalWindow';
+
+export interface ModalContextProviderConfig {
+  title: string;
+  children: JSX.Element;
+}
 
 const ModalContextProvider: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setContent] = useState(null);
+  const [modalContent, setContent] = useState({});
 
-  const openModal = (modalConfig) => {
+  const openModal = (modalConfig: ModalContextProviderConfig) => {
     setIsOpen(true);
     setContent(modalConfig);
   };
@@ -25,7 +30,7 @@ const ModalContextProvider: React.FC = () => {
   };
 
   return (
-    <ModalCtx.Provider value={valueModalProvider}>
+    <Context.Provider value={valueModalProvider}>
       {isOpen
         && (
         <ModalWindow isOpen={isOpen} title={modalContent?.title} closeModal={closeModal}>
@@ -33,7 +38,7 @@ const ModalContextProvider: React.FC = () => {
         </ModalWindow>
       )}
       {children}
-    </ModalCtx.Provider>
+    </Context.Provider>
   );
 };
 

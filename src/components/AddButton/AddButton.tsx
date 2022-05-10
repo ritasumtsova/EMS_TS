@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Col, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import ModalContext from '../../contexts/ModalContext';
+import { Context } from '../../contexts/ModalContext';
 import './AddButton.scss';
 
 interface AddButtonProps {
@@ -13,9 +13,9 @@ interface AddButtonProps {
 
 const AddButton: React.FC<AddButtonProps> = ({ title, modalForm }) => {
   const openModalHandler = () => {
-    const { openModal } = this.context;
+    const appContext = useContext(Context);
 
-    openModal({
+    appContext!.openModal({
       title,
       children: modalForm,
     });
@@ -42,4 +42,3 @@ const AddButton: React.FC<AddButtonProps> = ({ title, modalForm }) => {
 };
 
 export default AddButton;
-AddButton.contextType = ModalContext;

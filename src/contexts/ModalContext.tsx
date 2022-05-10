@@ -1,10 +1,14 @@
 import React from 'react';
 
-interface ModalContext {
-  openModal: MouseEventHandler<HTMLButtonElement>;
-  closeModal: Function;
+export interface AddButtonProps {
+  title: string;
+  children: React.FC;
+}
+
+export interface ModalContext {
+  openModal: (modalConfig: AddButtonProps) => void;
+  closeModal: () => void;
 };
 
-const ModalCtx = React.createContext<ModalContext | null>(null);
+export const Context = React.createContext<ModalContext | null>(null);
 
-export default ModalCtx;
