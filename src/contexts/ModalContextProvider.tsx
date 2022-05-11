@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
-import { Context } from './ModalContext';
+import ModalContext from './ModalContext';
 import ModalWindow from '../components/ModalWindow/ModalWindow';
+import { ModalWindowContent } from '../types/modals';
 
-export interface ModalContextProviderConfig {
-  title: string;
-  children: JSX.Element;
+interface ModalContentProviderProps {
+  children: React.ReactNode;
 }
 
-const ModalContextProvider: React.FC = () => {
+const ModalContextProvider: React.FC<ModalContentProviderProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setContent] = useState({});
+  const [content, setContent] = useState<ModalWindowContent | undefined>(undefined);
 
-  const openModal = (modalConfig: ModalContextProviderConfig) => {
+  const openModal = (modalConfig: ModalWindowContent) => {
     setIsOpen(true);
     setContent(modalConfig);
   };
@@ -21,24 +21,23 @@ const ModalContextProvider: React.FC = () => {
     setIsOpen(false);
   };
 
-  // render() {
-  //   const { children } = this.props;
-  //   const { modalOpened, modalContent } = this.state;
-  const valueModalProvider = {
-    openModal,
-    closeModal,
-  };
+  const valueModalProvider = useMemo(() => {
+    return {
+      openModal,
+      closeModal,
+    };
+  }, [isOpen]);
 
   return (
-    <Context.Provider value={valueModalProvider}>
+    <ModalContext.Provider value={valueModalProvider}>
       {isOpen
         && (
-        <ModalWindow isOpen={isOpen} title={modalContent?.title} closeModal={closeModal}>
-          {modalContent?.children}
-        </ModalWindow>
-      )}
+          <ModalWindow isOpen={isOpen} title={content!.title} closeModal={closeModal}>
+            {content!.modalForm}
+          </ModalWindow>
+        )}
       {children}
-    </Context.Provider>
+    </ModalContext.Provider>
   );
 };
 

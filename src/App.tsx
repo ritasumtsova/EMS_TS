@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 
 import ModalContextProvider from './contexts/ModalContextProvider';
 import PrivateRoute from './routes/PrivateRoute';
-import Error from './components/pages/Error/Error';
+import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
 import Header from './components/Header/Header';
 import './App.scss';
@@ -41,7 +41,7 @@ const App: React.FC = () => {
               }
             />
           </Route>
-          <Route path="*" element={<Error />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Col>
     </ModalContextProvider>

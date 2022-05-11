@@ -1,14 +1,6 @@
 import React from 'react';
+import { ModalWindowContext } from '../types/modals';
 
-export interface AddButtonProps {
-  title: string;
-  children: React.FC;
-}
+const ModalContext = React.createContext<ModalWindowContext | null>(null);
 
-export interface ModalContext {
-  openModal: (modalConfig: AddButtonProps) => void;
-  closeModal: () => void;
-};
-
-export const Context = React.createContext<ModalContext | null>(null);
-
+export default ModalContext;

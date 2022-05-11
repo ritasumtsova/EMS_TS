@@ -3,7 +3,9 @@ import React, { useEffect, useState, useMemo } from 'react';
 import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
+import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
+import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 
 const Departments: React.FC = () => {
   const [departments, setDepartments] = useState<Department[]>([]);
@@ -14,7 +16,7 @@ const Departments: React.FC = () => {
 
       setDepartments(res.data.data);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   };
 
@@ -24,17 +26,15 @@ const Departments: React.FC = () => {
 
   useEffect(() => {}, [departmentsList]);
 
+  if (!departments) {
+    return <NotFound />;
+  }
+
   return (
-    <div>
-      {departments.length > 0
-        ? (
-          <>
-            <AddButton title="Add department " />
-            <DepartmnetsList departments={departments} />
-          </>
-        )
-        : <div>Departments not found</div>}
-    </div>
+    <>
+      <AddButton title="Add department " modalForm={<DepartmentForm />} />
+      <DepartmnetsList departments={departments || []} />
+    </>
   );
 };
 

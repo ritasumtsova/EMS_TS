@@ -11,14 +11,14 @@ interface ModalWindowProps {
   title: string;
   isOpen: boolean;
   closeModal: () => void;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const ModalWindow: React.FC<ModalWindowProps> = ({
   title,
   isOpen,
   closeModal,
-  children
+  children,
 }) => {
   return (
     <Modal
