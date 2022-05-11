@@ -9,7 +9,7 @@ const AuthAPI = {
     baseURL: process.env.REACT_APP_BASEURL,
   }),
 
-  login(userName: string, password: string): AxiosResponse<Auth> {
+  login(userName: string, password: string): Promise<AxiosResponse<Auth>> {
     return AuthAPI.CONFIG.post('user/login', {
       userName,
       password,
