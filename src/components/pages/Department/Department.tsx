@@ -5,6 +5,7 @@ import { Row } from 'reactstrap';
 import DepartmentsAPI from '../../../API/Departments';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
+import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
 import './Department.scss';
@@ -35,7 +36,7 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <>
-      <AddButton title="Add employee " />
+      <AddButton modalForm={<EmployeeForm />} title="Add employee " />
       <Row className="Department">
         <h2>{department.description}</h2>
         <EmployeesList employees={department.employees || []} />

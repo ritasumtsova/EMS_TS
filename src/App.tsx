@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
+import ModalContextProvider from './contexts/ModalContextProvider';
 import PrivateRoute from './routes/PrivateRoute';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
@@ -13,7 +14,7 @@ const Department: Function = React.lazy(() => import('./components/pages/Departm
 
 const App: React.FC = () => {
   return (
-    <>
+    <ModalContextProvider>
       <Header />
       <Col className="App" xs="12">
         <Routes>
@@ -43,7 +44,7 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Col>
-    </>
+    </ModalContextProvider>
   );
 };
 
