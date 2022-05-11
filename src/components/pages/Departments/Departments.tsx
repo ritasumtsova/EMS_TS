@@ -16,7 +16,7 @@ const Departments: React.FC = () => {
 
       setDepartments(res.data.data);
     } catch (err) {
-      // console.error(err);
+      console.error(err);
     }
   };
 
