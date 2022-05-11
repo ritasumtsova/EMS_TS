@@ -7,4 +7,5 @@ export interface ModalWindowContent {
 export interface ModalWindowContext {
   openModal: (modalConfig: ModalWindowContent) => void;
   closeModal: () => void;
+  submitHandler: () => void;
 };

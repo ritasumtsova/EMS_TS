@@ -20,6 +20,20 @@ const Departments: React.FC = () => {
     }
   };
 
+  // const addDepartment = async (name: string, description: string) => {
+  //   try {
+  //     const res = await DepartmentsAPI.addDepartment(name, description);
+  //     console.log(res);
+
+  //     return res;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  const submit = () => {
+    console.log('submit works!');
+  };
+
   const departmentsList = useMemo(() => {
     return getDepartments();
   }, [departments]);
@@ -32,7 +46,7 @@ const Departments: React.FC = () => {
 
   return (
     <>
-      <AddButton title="Add department " modalForm={<DepartmentForm />} />
+      <AddButton title="Add department " modalForm={<DepartmentForm />} submitHandler={submit}/>
       <DepartmnetsList departments={departments || []} />
     </>
   );

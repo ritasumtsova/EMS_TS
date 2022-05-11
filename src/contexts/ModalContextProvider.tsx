@@ -21,10 +21,15 @@ const ModalContextProvider: React.FC<ModalContentProviderProps> = ({ children })
     setIsOpen(false);
   };
 
+  const submitHandler = () => {
+    console.log('submit handler works');
+  };
+
   const valueModalProvider = useMemo(() => {
     return {
       openModal,
       closeModal,
+      submitHandler
     };
   }, [isOpen]);
 
@@ -32,7 +37,7 @@ const ModalContextProvider: React.FC<ModalContentProviderProps> = ({ children })
     <ModalContext.Provider value={valueModalProvider}>
       {isOpen
         && (
-          <ModalWindow isOpen={isOpen} title={content!.title} closeModal={closeModal}>
+          <ModalWindow isOpen={isOpen} title={content!.title} closeModal={closeModal} submitHandler={submitHandler}>
             {content!.modalForm}
           </ModalWindow>
         )}
