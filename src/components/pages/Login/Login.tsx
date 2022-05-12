@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { Navigate } from 'react-router';
 import {
   Button,
@@ -17,11 +17,9 @@ const Login: React.FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   
-  //  BUT HERE loaderContext RECEIVING NULL
   const loaderContext = useContext(LoaderContext);
 
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    // SO THIS ONE ISN'T WORKING
     loaderContext!.toggleLoader(loaderContext!.isLoading);
     e.preventDefault();
 
