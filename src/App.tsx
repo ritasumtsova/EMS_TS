@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
 import ModalContextProvider from './contexts/ModalContextProvider';
+import LoaderContextProvider from './contexts/Loader/LoaderContextProvider';
 import PrivateRoute from './routes/PrivateRoute';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
@@ -14,37 +15,40 @@ const Department: Function = React.lazy(() => import('./components/pages/Departm
 
 const App: React.FC = () => {
   return (
-    <ModalContextProvider>
-      <Header />
-      <Col className="App" xs="12">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route
-              path="/departments/:id"
-              element={
-                (
-                  <Suspense fallback={<p>Loading</p>}>
-                    <Department />
-                  </Suspense>
-                )
-              }
-            />
-            <Route
-              path="/departments"
-              element={
-                (
-                  <Suspense fallback={<p>Loading</p>}>
-                    <Departments />
-                  </Suspense>
-                )
-              }
-            />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Col>
-    </ModalContextProvider>
+    // I DOUBT AM I DOING RIGHT HERE BECAUSE OF NESTED PROVIDERS ??
+    <LoaderContextProvider>
+      <ModalContextProvider>
+        <Header />
+        <Col className="App" xs="12">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route element={<PrivateRoute />}>
+              <Route
+                path="/departments/:id"
+                element={
+                  (
+                    <Suspense fallback={<p>Loading</p>}>
+                      <Department />
+                    </Suspense>
+                  )
+                }
+              />
+              <Route
+                path="/departments"
+                element={
+                  (
+                    <Suspense fallback={<p>Loading</p>}>
+                      <Departments />
+                    </Suspense>
+                  )
+                }
+              />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Col>
+      </ModalContextProvider>
+    </LoaderContextProvider>
   );
 };
 
