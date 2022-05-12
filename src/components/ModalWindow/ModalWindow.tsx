@@ -12,7 +12,6 @@ interface ModalWindowProps {
   isOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
-  submitHandler: () => void;
 }
 
 const ModalWindow: React.FC<ModalWindowProps> = ({
@@ -20,7 +19,6 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
   isOpen,
   closeModal,
   children,
-  submitHandler,
 }) => {
   return (
     <Modal
@@ -35,7 +33,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
         {children}
       </ModalBody>
       <ModalFooter>
-        <Button onClick={submitHandler} color="primary" type="submit">Save</Button>
+        <Button disabled color="primary" type="submit">Save</Button>
         <Button onClick={closeModal} color="danger">Cancel</Button>
       </ModalFooter>
     </Modal>
