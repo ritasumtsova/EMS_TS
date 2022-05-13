@@ -3,7 +3,7 @@ import { Col, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import ModalContext from '../../contexts/ModalContext';
+import ModalContext from '../../contexts/Modals/ModalContext';
 import { ModalWindowContent } from '../../types/modals';
 import './AddButton.scss';
 

@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 
 import DepartmentsAPI from '../../../API/Departments';
+import LoaderContext from '../../../contexts/Loader/LoaderContext';
 import { Department } from '../../../types/departments';
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
@@ -14,7 +15,11 @@ const DepartmentPage: React.FC = () => {
   const { id } = useParams();
   const [department, setDepartment] = useState<Department>();
 
+  const loaderContex = useContext(LoaderContext);
+
   const getDepartmentInfo = async () => {
+    loaderContex!.toggleLoader(loaderContex!.isLoading);
+
     try {
       const res = await DepartmentsAPI.getDepartmentInfo(id!);
 
@@ -22,6 +27,8 @@ const DepartmentPage: React.FC = () => {
     } catch (err) {
       console.error(err);
     }
+
+    loaderContex!.toggleLoader(loaderContex!.isLoading);
   };
 
   const departmentInfo = useMemo(() => {

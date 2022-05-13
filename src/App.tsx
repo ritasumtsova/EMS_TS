@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
-import ModalContextProvider from './contexts/ModalContextProvider';
+import ModalContextProvider from './contexts/Modals/ModalContextProvider';
 import LoaderContextProvider from './contexts/Loader/LoaderContextProvider';
 import PrivateRoute from './routes/PrivateRoute';
 import NotFound from './components/pages/NotFound/NotFound';

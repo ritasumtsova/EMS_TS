@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import LoaderContext from './LoaderContext';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -14,10 +14,12 @@ const LoaderContextProvider: React.FC<LoaderContextProviderProps> = ({ children 
     setIsLoading((prevState) => !prevState);
   };
 
-  const valueLoaderProvider = {
+  const valueLoaderProvider = useMemo(() => {
+    return {
       isLoading,
       toggleLoader
-  };
+    };
+  }, [isLoading]);
 
   return (
     <>

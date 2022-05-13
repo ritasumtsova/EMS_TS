@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 
 import ModalContext from './ModalContext';
-import ModalWindow from '../components/ModalWindow/ModalWindow';
-import { ModalWindowContent } from '../types/modals';
+import ModalWindow from '../../components/ModalWindow/ModalWindow';
+import { ModalWindowContent } from '../../types/modals';
 
 interface ModalContentProviderProps {
   children: React.ReactNode;
