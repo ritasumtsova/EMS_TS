@@ -33,7 +33,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
         {children}
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" disabled type="submit">Save</Button>
+        <Button disabled color="primary" type="submit">Save</Button>
         <Button onClick={closeModal} color="danger">Cancel</Button>
       </ModalFooter>
     </Modal>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { Navigate } from 'react-router';
 import {
   Button,
@@ -9,14 +9,18 @@ import {
 } from 'reactstrap';
 
 import AuthAPI from '../../../API/Auth';
+import LoaderContext from '../../../contexts/Loader/LoaderContext';
 import './Login.scss';
 
 const Login: React.FC = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  
+  const loaderContext = useContext(LoaderContext);
 
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    loaderContext!.toggleLoader(loaderContext!.isLoading);
     e.preventDefault();
 
     try {
@@ -27,6 +31,8 @@ const Login: React.FC = () => {
     } catch (err) {
       console.error(err);
     }
+
+    loaderContext!.toggleLoader(loaderContext!.isLoading);
   };
 
   if (isAuth) {
