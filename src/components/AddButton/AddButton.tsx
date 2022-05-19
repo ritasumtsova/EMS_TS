@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import ModalContext from '../../contexts/Modals/ModalContext';
-import { ModalWindowContent } from '../../types/modals';
+import { ModalWindowContent } from '../../types/components/modals';
 import './AddButton.scss';
 
 const AddButton: React.FC<ModalWindowContent> = ({ title, modalForm }) => {

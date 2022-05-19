@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Employee } from '../types/employees';
+import { Employee } from '../types/components/employees';
 
 const axios = require('axios');
 

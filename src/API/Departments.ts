@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Department, Departments } from '../types/departments';
+import { Department, Departments } from '../types/components/departments';
 
 const axios = require('axios');
 
