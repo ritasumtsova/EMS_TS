@@ -4,7 +4,6 @@ import { AppThunk, AppThunkDispatch } from '../../types/store/generalStateTypes'
 import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
 import { Departments } from './../../types/components/departments';
 import DepartmentsAPI from '../../API/Departments';
-import { APIError } from '../../types/components/APIError';
 
 export const fetchDepartments = (): ActionType => {
   return {
