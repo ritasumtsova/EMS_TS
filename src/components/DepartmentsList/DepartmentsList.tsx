@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'reactstrap';
 
-import { Department } from '../../types/departments';
+import { Department } from '../../types/components/departments';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import NotFound from '../pages/NotFound/NotFound';
@@ -14,7 +14,7 @@ interface DepartmentsListProps {
 
 const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
   if (departments.length === 0) {
-    return <NotFound />;
+    return <NotFound errMsg=""/>;
   }
 
   return (

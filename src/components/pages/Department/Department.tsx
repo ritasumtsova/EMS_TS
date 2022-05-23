@@ -4,7 +4,7 @@ import { Row } from 'reactstrap';
 
 import DepartmentsAPI from '../../../API/Departments';
 import LoaderContext from '../../../contexts/Loader/LoaderContext';
-import { Department } from '../../../types/departments';
+import { Department } from '../../../types/components/departments';
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
@@ -38,7 +38,7 @@ const DepartmentPage: React.FC = () => {
   useEffect(() => {}, [departmentInfo]);
 
   if (!department) {
-    return <NotFound />;
+    return <NotFound errMsg=""/>;
   }
 
   return (

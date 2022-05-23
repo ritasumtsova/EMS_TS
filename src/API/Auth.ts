@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Auth } from '../types/auth';
+import { Auth } from '../types/components/auth';
 
 const axios = require('axios');
 

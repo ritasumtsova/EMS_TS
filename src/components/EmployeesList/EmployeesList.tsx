@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Container } from 'reactstrap';
 
-import { Employee } from '../../types/employees';
+import { Employee } from '../../types/components/employees';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import NotFound from '../pages/NotFound/NotFound';
@@ -13,7 +13,7 @@ interface EmployeesListProps {
 
 const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
   if (employees.length === 0) {
-    return <NotFound />;
+    return <NotFound errMsg=""/>;
   }
 
   return (

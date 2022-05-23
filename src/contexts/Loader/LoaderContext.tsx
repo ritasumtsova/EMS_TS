@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingSpinnerContext } from '../../types/loader';
+import { LoadingSpinnerContext } from '../../types/components/loader';
 
 const LoaderContext = React.createContext<LoadingSpinnerContext | null>(null);
 
