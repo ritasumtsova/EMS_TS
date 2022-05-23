@@ -1,11 +1,11 @@
-import { ActionType } from '../../types/store/actionTypes';
+import { ActionType } from '../../types/store/ActionTypes';
 import { departmentActionTypes } from '../actionTypes/departmentActionTypes';
 import { DepartmentInitState } from "../../types/store/initStateInterfaces";
 
 const initState: DepartmentInitState = {
   loading: false,
   department: null,
-  errorMsg: ''
+  errorMessage: ''
 };
 
 const departmentReducer = (state: DepartmentInitState = initState, action: ActionType) => {
@@ -21,7 +21,7 @@ const departmentReducer = (state: DepartmentInitState = initState, action: Actio
         ...state,
         loading: false,
         department: action.payload,
-        errorMsg: ''
+        errorMessage: ''
       };
 
     case departmentActionTypes.FETCH_DEPARTMENT_FAILURE:
@@ -29,7 +29,7 @@ const departmentReducer = (state: DepartmentInitState = initState, action: Actio
         ...state,
         loading: false,
         department: null,
-        errorMsg: action.payload
+        errorMessage: action.payload
       };
 
     default:

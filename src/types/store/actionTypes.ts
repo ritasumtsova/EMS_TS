@@ -1,6 +1,8 @@
 import { departmentsActionTypes } from "../../store/actionTypes/departmentsActionTypes";
 import { departmentActionTypes } from "../../store/actionTypes/departmentActionTypes";
+import { authActionTypes } from '../../store/actionTypes/authActionTypes';
 import { Departments, Department } from '../components/departments';
+import { Auth } from './../components/auth';
 
 interface FETCH_DEPARTMENTS {
   type: departmentsActionTypes.FETCH_DEPARTMENTS;
@@ -30,10 +32,27 @@ interface FETCH_DEPARTMENT_FAILURE {
   payload: string;
 }
 
+interface LOGIN {
+  type: authActionTypes.LOGIN;
+}
+
+interface LOGIN_SUCCESS {
+  type: authActionTypes.LOGIN_SUCCESS;
+  payload: Auth;
+}
+
+interface LOGIN_FAILURE {
+  type: authActionTypes.LOGIN_FAILURE;
+  payload: string;
+}
+
 export type ActionType =
   FETCH_DEPARTMENTS
   | FETCH_DEPARTMENTS_SUCCESS
   | FETCH_DEPARTMENTS_FAILURE
   | FETCH_DEPARTMENT
   | FETCH_DEPARTMENT_SUCCESS
-  | FETCH_DEPARTMENT_FAILURE;
+  | FETCH_DEPARTMENT_FAILURE
+  | LOGIN
+  | LOGIN_SUCCESS
+  | LOGIN_FAILURE;

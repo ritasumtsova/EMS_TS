@@ -14,7 +14,7 @@ interface DepartmentsListProps {
 
 const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
   if (departments.length === 0) {
-    return <NotFound errMsg=""/>;
+    return <NotFound />;
   }
 
   return (

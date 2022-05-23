@@ -4,30 +4,34 @@ import AddButton from '../../AddButton/AddButton';
 import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 import DepartmentForm from '../../DepartmentForm/DepartmentForm';
-import { AppThunkDispatch, rootState } from '../../../types/store/generalStateTypes';
-import { fetchDepartmentsThunk } from '../../../store/actionCreators/departmentsActionCreators';
+import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
+import { fetchDepartmentsThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import { departmentsSelector } from '../../../store/selectors/departments';
 
 const Departments: React.FC = () => {
-  const departments = useSelector((state: rootState) => state.departments.departments?.data);
-  const errMsg = useSelector((state: rootState) => state.departments.errorMsg);
-  // const loading = useSelector((state: rootState) => state.departments.loading);
+  const { departments, errorMessage, loading } = useSelector(departmentsSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
   const departmentsList = useMemo(() => {
     return dispatch(fetchDepartmentsThunk());
-  }, [departments]);
+  }, []);
 
   useEffect(() => {}, [departmentsList]);
 
-  if (errMsg) {
-    return <NotFound errMsg={errMsg}/>;
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (errorMessage) {
+    return <NotFound errorMessage={errorMessage}/>;
   }
 
   return (
     <>
       <AddButton title="Add department " modalForm={<DepartmentForm />} />
-      <DepartmnetsList departments={departments || []} />
+      <DepartmnetsList departments={departments?.data || []} />
     </>
   );
 };
