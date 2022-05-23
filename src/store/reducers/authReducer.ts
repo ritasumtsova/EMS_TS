@@ -1,4 +1,4 @@
-import { ActionType } from '../../types/store/ActionTypes';
+import { ActionType } from '../../types/store/actionTypes';
 import { authActionTypes } from '../actionTypes/authActionTypes';
 import { AuthInitState } from "../../types/store/initStateInterfaces";
 
