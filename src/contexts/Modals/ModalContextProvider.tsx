@@ -30,12 +30,12 @@ const ModalContextProvider: React.FC<ModalContentProviderProps> = ({ children })
 
   return (
     <ModalContext.Provider value={valueModalProvider}>
-      {isOpen
+      {/* {isOpen
         && (
           <ModalWindow isOpen={isOpen} title={content!.title} closeModal={closeModal}>
             {content!.modalForm}
           </ModalWindow>
-        )}
+        )} */}
       {children}
     </ModalContext.Provider>
   );

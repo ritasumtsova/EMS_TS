@@ -7,8 +7,8 @@ import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
 import { departmentsSelector } from '../../../store/selectors/departments';
 
-import AddButton from '../../AddButton/AddButton';
-import EmployeeForm from '../../EmployeeForm/EmployeeForm';
+// import AddButton from '../../AddButton/AddButton';
+// import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
@@ -45,7 +45,7 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <>
-      <AddButton modalForm={<EmployeeForm />} title="Add employee " />
+      {/* <AddButton modalForm={<EmployeeForm />} title="Add employee " /> */}
       <Row className="Department">
         <h2>{department?.description}</h2>
         <EmployeesList employees={department?.employees || []} />

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
-import { fetchDepartmentsThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { fetchDepartmentsThunk, addDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
 import { departmentsSelector } from '../../../store/selectors/departments';
 
 import AddButton from '../../AddButton/AddButton';
@@ -39,7 +39,7 @@ const Departments: React.FC = () => {
 
   return (
     <>
-      <AddButton title="Add department " modalForm={<DepartmentForm />} />
+      <AddButton title="Add department " modalForm={<DepartmentForm />} submitHandler={addDepartmentThunk} />
       <DepartmnetsList departments={departments?.data || []} />
     </>
   );

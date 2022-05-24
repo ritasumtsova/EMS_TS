@@ -1,23 +1,30 @@
 import { ActionType } from '../../types/store/actionTypes';
 import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
-import { Departments } from './../../types/components/departments';
+import { Departments, Department } from './../../types/components/departments';
 
-export const fetchDepartments = (): ActionType => {
+export const fetchStart = (): ActionType => {
   return {
-    type: departmentsActionTypes.FETCH_DEPARTMENTS,
+    type: departmentsActionTypes.FETCH_START,
   };
 };
 
-export const fetchDepartmentsSuccess = (departments: Departments): ActionType => {
+export const fetchDepartments = (departments: Departments): ActionType => {
   return {
-    type: departmentsActionTypes.FETCH_DEPARTMENTS_SUCCESS,
+    type: departmentsActionTypes.FETCH_DEPARTMENTS,
     payload: departments
   };
 };
 
-export const fetchDepartmentsFailure = (errorMessage: string): ActionType => {
+export const fetchFailure = (errorMessage: string): ActionType => {
   return {
-    type: departmentsActionTypes.FETCH_DEPARTMENTS_FAILURE,
+    type: departmentsActionTypes.FETCH_FAILURE,
     payload: errorMessage
   };
+};
+
+export const addDepartment = (department: Department): ActionType => {
+  return {
+    type: departmentsActionTypes.ADD_DEPARTMENT,
+    payload: department
+  }
 };

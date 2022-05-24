@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Modal,
   ModalHeader,
@@ -6,20 +7,13 @@ import {
   ModalFooter,
   Button,
 } from 'reactstrap';
+import { modalsSelector } from '../../store/selectors/modals';
+import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 
-interface ModalWindowProps {
-  title: string;
-  isOpen: boolean;
-  closeModal: () => void;
-  children: React.ReactNode;
-}
+const ModalWindow: React.FC= () => {
+  const { isOpen, content } = useSelector(modalsSelector);
+  const dispatch = useDispatch();
 
-const ModalWindow: React.FC<ModalWindowProps> = ({
-  title,
-  isOpen,
-  closeModal,
-  children,
-}) => {
   return (
     <Modal
       centered
@@ -27,14 +21,14 @@ const ModalWindow: React.FC<ModalWindowProps> = ({
       isOpen={isOpen}
     >
       <ModalHeader>
-        {title}
+        {content?.title}
       </ModalHeader>
       <ModalBody>
-        {children}
+        {content?.modalForm}
       </ModalBody>
       <ModalFooter>
-        <Button disabled color="primary" type="submit">Save</Button>
-        <Button onClick={closeModal} color="danger">Cancel</Button>
+        <Button onClick={() => dispatch(content?.submitHandler('test department', 'test description'))} color="primary" type="submit">Save</Button>
+        <Button onClick={() => dispatch(closeModal(isOpen))} color="danger">Cancel</Button>
       </ModalFooter>
     </Modal>
   );
