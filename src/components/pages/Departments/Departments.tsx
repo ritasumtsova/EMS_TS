@@ -12,14 +12,8 @@ import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 const Departments: React.FC = () => {
-  const {
-    departmentsInfo:
-      {
-        loading,
-        departments,
-        errorMessage
-      }
-  } = useSelector(departmentsSelector);
+  const { departmentsInfo } = useSelector(departmentsSelector);
+  const { loading ,departments, errorMessage } = departmentsInfo;
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

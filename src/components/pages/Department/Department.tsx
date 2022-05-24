@@ -18,14 +18,8 @@ import './Department.scss';
 const DepartmentPage: React.FC = () => {
   const { id } = useParams();
 
-  const {
-    departmentById:
-      {
-        loading,
-        department,
-        errorMessage
-      }
-  } = useSelector(departmentsSelector);
+  const { departmentById } = useSelector(departmentsSelector);
+  const { loading, department, errorMessage } = departmentById;
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
