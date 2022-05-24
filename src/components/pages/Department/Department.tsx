@@ -2,24 +2,30 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
+
+import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
+import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { departmentsSelector } from '../../../store/selectors/departments';
+
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
-import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
-import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
-import './Department.scss';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import { departmentSelector } from '../../../store/selectors/depatment';
+
+import './Department.scss';
 
 const DepartmentPage: React.FC = () => {
   const { id } = useParams();
 
   const {
-    department,
-    errorMessage,
-    loading
-  } = useSelector(departmentSelector);
+    departmentById:
+      {
+        loading,
+        department,
+        errorMessage
+      }
+  } = useSelector(departmentsSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

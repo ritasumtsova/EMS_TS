@@ -15,9 +15,9 @@ export const loginSuccess = (auth: Auth): ActionType => {
   };
 };
 
-export const loginFailure = (errorMsg: string): ActionType => {
+export const loginFailure = (errorMessage: string): ActionType => {
   return {
     type: authActionTypes.LOGIN_FAILURE,
-    payload: errorMsg
+    payload: errorMessage
   };
 };

@@ -2,22 +2,22 @@ import { ActionType } from '../../types/store/actionTypes';
 import { departmentActionTypes } from './../actionTypes/departmentActionTypes';
 import { Department } from './../../types/components/departments';
 
-export const fetchDepartment = (): ActionType => {
+export const fetchDepartmentById = (): ActionType => {
   return {
-    type: departmentActionTypes.FETCH_DEPARTMENT,
+    type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID,
   };
 };
 
-export const fetchDepartmentSuccess = (department: Department): ActionType => {
+export const fetchDepartmentByIdSuccess = (department: Department): ActionType => {
   return {
-    type: departmentActionTypes.FETCH_DEPARTMENT_SUCCESS,
+    type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID_SUCCESS,
     payload: department
   };
 };
 
-export const fetchDepartmentFailure = (errorMsg: string): ActionType => {
+export const fetchDepartmentByIdFailure = (errorMessage: string): ActionType => {
   return {
-    type: departmentActionTypes.FETCH_DEPARTMENT_FAILURE,
-    payload: errorMsg
+    type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID_FAILURE,
+    payload: errorMessage
   };
 };

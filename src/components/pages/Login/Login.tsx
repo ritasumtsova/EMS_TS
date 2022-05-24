@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import {
   Button,
@@ -7,13 +8,15 @@ import {
   Input,
   Container,
 } from 'reactstrap';
-import './Login.scss';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { loginThunk } from '../../../store/actionCreators/thunks/authThunks';
+import { authSelector } from '../../../store/selectors/auth';
+
 import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import { authSelector } from '../../../store/selectors/auth';
+
+import './Login.scss';
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState('');

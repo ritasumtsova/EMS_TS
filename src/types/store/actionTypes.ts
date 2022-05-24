@@ -18,17 +18,17 @@ interface FETCH_DEPARTMENTS_FAILURE {
   payload: string;
 }
 
-interface FETCH_DEPARTMENT {
-  type: departmentActionTypes.FETCH_DEPARTMENT;
+interface FETCH_DEPARTMENT_BY_ID {
+  type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID;
 }
 
-interface FETCH_DEPARTMENT_SUCCESS {
-  type: departmentActionTypes.FETCH_DEPARTMENT_SUCCESS;
+interface FETCH_DEPARTMENT_BY_ID_SUCCESS {
+  type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID_SUCCESS;
   payload: Department | null;
 }
 
-interface FETCH_DEPARTMENT_FAILURE {
-  type: departmentActionTypes.FETCH_DEPARTMENT_FAILURE;
+interface FETCH_DEPARTMENT_BY_ID_FAILURE {
+  type: departmentActionTypes.FETCH_DEPARTMENT_BY_ID_FAILURE;
   payload: string;
 }
 
@@ -50,9 +50,9 @@ export type ActionType =
   FETCH_DEPARTMENTS
   | FETCH_DEPARTMENTS_SUCCESS
   | FETCH_DEPARTMENTS_FAILURE
-  | FETCH_DEPARTMENT
-  | FETCH_DEPARTMENT_SUCCESS
-  | FETCH_DEPARTMENT_FAILURE
+  | FETCH_DEPARTMENT_BY_ID
+  | FETCH_DEPARTMENT_BY_ID_SUCCESS
+  | FETCH_DEPARTMENT_BY_ID_FAILURE
   | LOGIN
   | LOGIN_SUCCESS
   | LOGIN_FAILURE;

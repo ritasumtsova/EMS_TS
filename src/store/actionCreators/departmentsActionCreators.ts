@@ -15,9 +15,9 @@ export const fetchDepartmentsSuccess = (departments: Departments): ActionType =>
   };
 };
 
-export const fetchDepartmentsFailure = (errorMsg: string): ActionType => {
+export const fetchDepartmentsFailure = (errorMessage: string): ActionType => {
   return {
     type: departmentsActionTypes.FETCH_DEPARTMENTS_FAILURE,
-    payload: errorMsg
+    payload: errorMessage
   };
 };

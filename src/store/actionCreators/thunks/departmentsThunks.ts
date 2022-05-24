@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { AppThunk, AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { fetchDepartments, fetchDepartmentsSuccess, fetchDepartmentsFailure } from '../departmentsActionCreators';
-import { fetchDepartment, fetchDepartmentSuccess, fetchDepartmentFailure } from '../departmentActionCreators';
+import { fetchDepartmentById, fetchDepartmentByIdSuccess, fetchDepartmentByIdFailure } from '../departmentActionCreators';
 import { Departments, Department } from '../../../types/components/departments';
 import DepartmentsAPI from '../../../API/Departments';
 
@@ -25,18 +25,18 @@ export const fetchDepartmentsThunk = (): AppThunk => {
 
 export const fetchDepartmentThunk = (id: string): AppThunk => {
   return async (dispatch: AppThunkDispatch): Promise<void> => {
-    dispatch(fetchDepartment());
+    dispatch(fetchDepartmentById());
 
     try {
       const res: AxiosResponse<Department> = await DepartmentsAPI.getDepartmentInfo(id);
       const department: Department = res.data;
 
-      dispatch(fetchDepartmentSuccess(department));
+      dispatch(fetchDepartmentByIdSuccess(department));
     } catch (err) {
       const error = err as AxiosError;
       const errorMessage: string = error.message;
 
-      dispatch(fetchDepartmentFailure(errorMessage));
+      dispatch(fetchDepartmentByIdFailure(errorMessage));
     };
   };
 };

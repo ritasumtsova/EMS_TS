@@ -10,13 +10,13 @@ const initState: DepartmentInitState = {
 
 const departmentReducer = (state: DepartmentInitState = initState, action: ActionType) => {
   switch(action.type) {
-    case departmentActionTypes.FETCH_DEPARTMENT:
+    case departmentActionTypes.FETCH_DEPARTMENT_BY_ID:
       return {
         ...state,
         loading: true
       };
 
-    case departmentActionTypes.FETCH_DEPARTMENT_SUCCESS:
+    case departmentActionTypes.FETCH_DEPARTMENT_BY_ID_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -24,7 +24,7 @@ const departmentReducer = (state: DepartmentInitState = initState, action: Actio
         errorMessage: ''
       };
 
-    case departmentActionTypes.FETCH_DEPARTMENT_FAILURE:
+    case departmentActionTypes.FETCH_DEPARTMENT_BY_ID_FAILURE:
       return {
         ...state,
         loading: false,
