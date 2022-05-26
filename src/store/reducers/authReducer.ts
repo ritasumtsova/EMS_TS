@@ -1,3 +1,4 @@
+import { APIActionTypes } from "./../actionTypes/APIActionTypes";
 import { ActionType } from '../../types/store/actionTypes';
 import { authActionTypes } from '../actionTypes/authActionTypes';
 import { AuthInitState } from "../../types/store/initStateInterfaces";
@@ -10,13 +11,13 @@ const initState: AuthInitState = {
 
 const authReducer = (state: AuthInitState = initState, action: ActionType) => {
   switch(action.type) {
-    case authActionTypes.LOGIN:
+    case APIActionTypes.FETCH_START:
       return {
         ...state,
         loading: true
       };
 
-    case authActionTypes.LOGIN_SUCCESS:
+    case authActionTypes.LOGIN:
       return {
         ...state,
         loading: false,
@@ -24,7 +25,7 @@ const authReducer = (state: AuthInitState = initState, action: ActionType) => {
         errorMessage: ''
       };
 
-    case authActionTypes.LOGIN_FAILURE:
+    case APIActionTypes.FETCH_FAILURE:
       return {
         ...state,
         loading: false,

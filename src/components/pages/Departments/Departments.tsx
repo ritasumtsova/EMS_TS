@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
-import { fetchDepartmentsThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { fetchDepartmentsThunk } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 
 import AddButton from '../../AddButton/AddButton';

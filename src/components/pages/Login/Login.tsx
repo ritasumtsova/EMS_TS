@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
-import { loginThunk } from '../../../store/actionCreators/thunks/authThunks';
+import { loginThunk } from '../../../store/actionCreators/authActionCreators';
 import { authSelector } from '../../../store/selectors/auth';
 
 import NotFound from '../NotFound/NotFound';
