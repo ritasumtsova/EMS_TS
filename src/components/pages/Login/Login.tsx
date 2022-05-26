@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import {
   Button,
@@ -8,34 +9,38 @@ import {
   Container,
 } from 'reactstrap';
 
-import AuthAPI from '../../../API/Auth';
-import LoaderContext from '../../../contexts/Loader/LoaderContext';
+import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
+import { loginThunk } from '../../../store/actionCreators/thunks/authThunks';
+import { authSelector } from '../../../store/selectors/auth';
+
+import NotFound from '../NotFound/NotFound';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+
 import './Login.scss';
 
 const Login: React.FC = () => {
-  const [isAuth, setIsAuth] = useState(false);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  
-  const loaderContext = useContext(LoaderContext);
 
-  const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    loaderContext!.toggleLoader(loaderContext!.isLoading);
+  const { token, errorMessage, loading } = useSelector(authSelector);
+
+  const dispatch = useDispatch<AppThunkDispatch>();
+
+  const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const res = await AuthAPI.login(login, password);
-
-      localStorage.setItem(process.env.REACT_APP_TOKEN!, res.data.token);
-      setIsAuth(true);
-    } catch (err) {
-      console.error(err);
-    }
-
-    loaderContext!.toggleLoader(loaderContext!.isLoading);
+    dispatch(loginThunk(login, password));
   };
 
-  if (isAuth) {
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (errorMessage) {
+    return <NotFound errorMessage={errorMessage} />;
+  }
+
+  if (token?.token) {
+    localStorage.setItem(process.env.REACT_APP_TOKEN!, token.token);
     return <Navigate to="/departments" />;
   }
 
@@ -67,7 +72,7 @@ const Login: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
           </FormGroup>
-          <Button color="primary" size="lg">Login</Button>
+          <Button type="submit" color="primary" size="lg">Login</Button>
         </Form>
       </Container>
     </Container>

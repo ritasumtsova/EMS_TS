@@ -1,52 +1,48 @@
-import React, { useEffect, useState, useMemo, useContext } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 
-import DepartmentsAPI from '../../../API/Departments';
-import LoaderContext from '../../../contexts/Loader/LoaderContext';
-import { Department } from '../../../types/components/departments';
+import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
+import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { departmentsSelector } from '../../../store/selectors/departments';
+
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+
 import './Department.scss';
 
 const DepartmentPage: React.FC = () => {
   const { id } = useParams();
-  const [department, setDepartment] = useState<Department>();
 
-  const loaderContex = useContext(LoaderContext);
+  const { departmentById } = useSelector(departmentsSelector);
+  const { loading, department, errorMessage } = departmentById;
 
-  const getDepartmentInfo = async () => {
-    loaderContex!.toggleLoader(loaderContex!.isLoading);
-
-    try {
-      const res = await DepartmentsAPI.getDepartmentInfo(id!);
-
-      setDepartment(res.data);
-    } catch (err) {
-      console.error(err);
-    }
-
-    loaderContex!.toggleLoader(loaderContex!.isLoading);
-  };
+  const dispatch = useDispatch<AppThunkDispatch>();
 
   const departmentInfo = useMemo(() => {
-    return getDepartmentInfo();
-  }, [id]);
+    return dispatch(fetchDepartmentThunk(id!));
+  }, []);
 
   useEffect(() => {}, [departmentInfo]);
 
-  if (!department) {
-    return <NotFound errMsg=""/>;
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (errorMessage) {
+    return <NotFound errorMessage={errorMessage}/>;
   }
 
   return (
     <>
       <AddButton modalForm={<EmployeeForm />} title="Add employee " />
       <Row className="Department">
-        <h2>{department.description}</h2>
-        <EmployeesList employees={department.employees || []} />
+        <h2>{department?.description}</h2>
+        <EmployeesList employees={department?.employees || []} />
       </Row>
     </>
   );

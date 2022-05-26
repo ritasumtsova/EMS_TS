@@ -46,7 +46,7 @@ const App: React.FC = () => {
                   }
                 />
               </Route>
-              <Route path="*" element={<NotFound  errMsg=""/>} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Col>
         </ModalContextProvider>

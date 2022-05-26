@@ -1,7 +1,20 @@
-import { Departments } from '../components/departments';
+import { Departments, Department } from '../components/departments';
+import { Auth } from '../components/auth';
 
 export interface DepartmentsInitState {
   loading: boolean;
   departments: null | Departments;
-  errorMsg: string;
+  errorMessage: string;
+}
+
+export interface DepartmentInitState {
+  loading: boolean;
+  department: null | Department;
+  errorMessage: string;
+}
+
+export interface AuthInitState {
+  loading: boolean;
+  token: null | Auth;
+  errorMessage: string;
 }

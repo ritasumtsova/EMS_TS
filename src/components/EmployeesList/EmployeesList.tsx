@@ -13,7 +13,7 @@ interface EmployeesListProps {
 
 const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
   if (employees.length === 0) {
-    return <NotFound errMsg=""/>;
+    return <NotFound />;
   }
 
   return (
