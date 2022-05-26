@@ -19,36 +19,36 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <LoaderContextProvider>
-        <Header />
         <ModalWindow />
+        <Header />
         <Col className="App" xs="12">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route element={<PrivateRoute />}>
-              <Route
-                path="/departments/:id"
-                element={
-                  (
-                    <Suspense fallback={<p>Loading</p>}>
-                      <Department />
-                    </Suspense>
-                  )
-                }
-              />
-              <Route
-                path="/departments"
-                element={
-                  (
-                    <Suspense fallback={<p>Loading</p>}>
-                      <Departments />
-                    </Suspense>
-                  )
-                }
-              />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Col>
+            <Route
+              path="/departments/:id"
+              element={
+                (
+                  <Suspense fallback={<p>Loading</p>}>
+                    <Department />
+                  </Suspense>
+                )
+              }
+            />
+            <Route
+              path="/departments"
+              element={
+                (
+                  <Suspense fallback={<p>Loading</p>}>
+                    <Departments />
+                  </Suspense>
+                )
+              }
+            />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Col>
       </LoaderContextProvider>
     </Provider>
   );

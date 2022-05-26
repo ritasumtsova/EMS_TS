@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
-import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { fetchDepartmentByIdThunk } from '../../../store/actionCreators/departmentActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 
 // import AddButton from '../../AddButton/AddButton';
@@ -18,19 +18,13 @@ import './Department.scss';
 const DepartmentPage: React.FC = () => {
   const { id } = useParams();
 
-  const {
-    departmentById:
-      {
-        loading,
-        department,
-        errorMessage
-      }
-  } = useSelector(departmentsSelector);
+  const { departmentById } = useSelector(departmentsSelector);
+  const { loading, department, errorMessage } = departmentById;
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
   const departmentInfo = useMemo(() => {
-    return dispatch(fetchDepartmentThunk(id!));
+    return dispatch(fetchDepartmentByIdThunk(id!));
   }, []);
 
   useEffect(() => {}, [departmentInfo]);

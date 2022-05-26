@@ -1,0 +1,4 @@
+export enum APIActionTypes {
+  FETCH_START = 'FETCH_START',
+  FETCH_FAILURE = 'FETCH_FAILURE'
+};

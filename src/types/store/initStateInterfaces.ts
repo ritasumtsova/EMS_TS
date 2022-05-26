@@ -1,6 +1,6 @@
 import { Departments, Department } from '../components/departments';
 import { Auth } from '../components/auth';
-import { ModalWindowContent } from './../components/modals';
+import { ModalWindowContent } from '../components/modals';
 
 export interface DepartmentsInitState {
   loading: boolean;

@@ -1,12 +1,12 @@
-import { ActionType } from '../../types/store/actionTypes';
-import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
-import { Departments, Department } from './../../types/components/departments';
+import { AxiosResponse, AxiosError } from 'axios';
 
-export const fetchStart = (): ActionType => {
-  return {
-    type: departmentsActionTypes.FETCH_START,
-  };
-};
+import { ActionType } from '../../types/store/actionTypes';
+import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
+import { Departments } from './../../types/components/departments';
+
+import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
+import { fetchStart, fetchFailure } from './APIActionCreatos';
+import DepartmentsAPI from '../../API/Departments';
 
 export const fetchDepartments = (departments: Departments): ActionType => {
   return {
@@ -15,10 +15,21 @@ export const fetchDepartments = (departments: Departments): ActionType => {
   };
 };
 
-export const fetchFailure = (errorMessage: string): ActionType => {
-  return {
-    type: departmentsActionTypes.FETCH_FAILURE,
-    payload: errorMessage
+export const fetchDepartmentsThunk = (): AppThunk => {
+  return async (dispatch: AppThunkDispatch): Promise<void> => {
+    dispatch(fetchStart());
+
+    try {
+      const res: AxiosResponse<Departments> = await DepartmentsAPI.getDepartments();
+      const departments: Departments = res.data;
+
+      dispatch(fetchDepartments(departments));
+    } catch (err) {
+      const error = err as AxiosError;
+      const errorMessage: string = error.message;
+
+      dispatch(fetchFailure(errorMessage));
+    };
   };
 };
 

@@ -10,8 +10,9 @@ import {
 import { modalsSelector } from '../../store/selectors/modals';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 
-const ModalWindow: React.FC= () => {
+const ModalWindow: React.FC = () => {
   const { isOpen, content } = useSelector(modalsSelector);
+
   const dispatch = useDispatch();
 
   return (
