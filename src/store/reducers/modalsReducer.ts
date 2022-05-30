@@ -15,10 +15,7 @@ const modalsReducer = (state: ModalsInitState = initState, action: ActionType) =
         ...state,
         isOpen: true,
         content: action.payload,
-        activeModals: [
-          ...state.activeModals,
-          action.payload
-        ]
+        activeModals: [...state.activeModals, action.payload]
       };
 
     case modalsActionTypes.CLOSE_MODAL:
