@@ -9,12 +9,28 @@ import {
 } from 'reactstrap';
 import { modalsSelector } from '../../store/selectors/modals';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
+import { formsSelector } from '../../store/selectors/formsSelectors';
+import { Department } from '../../types/components/departments';
 
 const ModalWindow: React.FC = () => {
-  const { isOpen, content } = useSelector(modalsSelector);
-
+  const { isOpen, content, activeModals } = useSelector(modalsSelector);
+  const { name, description } = useSelector(formsSelector);
   const dispatch = useDispatch();
+  // console.log(content?.title);
 
+  const submitHandler = () => {
+    let formData: Department | null = null;
+
+    if (content?.title) {
+      formData = {
+        name,
+        description
+      }
+    }
+    console.log(formData);
+
+    dispatch(content?.submitHandler(formData));
+  };
   return (
     <Modal
       centered
@@ -28,8 +44,19 @@ const ModalWindow: React.FC = () => {
         {content?.modalForm}
       </ModalBody>
       <ModalFooter>
-        <Button onClick={() => dispatch(content?.submitHandler('test department', 'test description'))} color="primary" type="submit">Save</Button>
-        <Button onClick={() => dispatch(closeModal(isOpen))} color="danger">Cancel</Button>
+        <Button
+          onClick={submitHandler}
+          color="primary"
+          type="submit"
+        >
+          Save
+        </Button>
+        <Button
+          onClick={() => dispatch(closeModal(activeModals[activeModals.length - 1]))}
+          color="danger"
+        >
+          Cancel
+        </Button>
       </ModalFooter>
     </Modal>
   );

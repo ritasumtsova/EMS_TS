@@ -1,3 +1,4 @@
 export enum departmentsActionTypes {
   FETCH_DEPARTMENTS = 'FETCH_DEPARTMENTS',
+  ADD_DEPARTMENT = 'ADD_DEPARTMENT'
 };

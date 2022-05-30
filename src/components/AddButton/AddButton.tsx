@@ -11,14 +11,11 @@ import './AddButton.scss';
 // import { modalsSelector } from '../../store/selectors/modals';
 
 const AddButton: React.FC<ModalWindowContent> = ({ title, modalForm, submitHandler }) => {
-  // const modalContext = useContext(ModalContext);
-  // const { isOpen  } = useSelector(modalsSelector);
   const modalContent = {
     title,
     modalForm,
-    submitHandler
+    submitHandler,
   };
-  console.log(modalContent.submitHandler);
   const dispatch = useDispatch();
 
   const openModalHandler = () => {
