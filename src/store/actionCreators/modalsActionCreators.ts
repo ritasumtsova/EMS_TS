@@ -9,9 +9,9 @@ export const openModal = (modalContent: ModalWindowContent): ActionType => {
   };
 };
 
-export const closeModal = (isOpen: boolean): ActionType => {
+export const closeModal = (currentModal: ModalWindowContent): ActionType => {
   return {
     type: modalsActionTypes.CLOSE_MODAL,
-    payload: !isOpen
+    payload: currentModal 
   };
 };

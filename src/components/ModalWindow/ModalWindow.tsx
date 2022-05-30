@@ -9,12 +9,22 @@ import {
 } from 'reactstrap';
 
 import { modalsSelector } from '../../store/selectors/modals';
-import { closeModal } from '../../store/actionCreators/modalsActionCreators';
+import { openModal, closeModal } from '../../store/actionCreators/modalsActionCreators';
+import EmployeeForm from '../EmployeeForm/EmployeeForm';
 
 const ModalWindow: React.FC = () => {
-  const { isOpen, content } = useSelector(modalsSelector);
+  const { isOpen, content, activeModals } = useSelector(modalsSelector);
 
   const dispatch = useDispatch();
+
+  const modalContent = {
+    title: 'test modal in modal',
+    modalForm: <EmployeeForm />
+  };
+
+  const fakeOpenModalHandler = () => {
+    dispatch(openModal(modalContent));
+  };
 
   return (
     <Modal
@@ -29,8 +39,13 @@ const ModalWindow: React.FC = () => {
         {content?.modalForm}
       </ModalBody>
       <ModalFooter>
-        <Button disabled color="primary" type="submit">Save</Button>
-        <Button onClick={() => dispatch(closeModal(isOpen))} color="danger">Cancel</Button>
+        <Button onClick={fakeOpenModalHandler} color="primary" type="submit">Save</Button>
+        <Button
+          onClick={() => dispatch(closeModal(activeModals[activeModals.length - 1]))}
+          color="danger"
+        >
+          Cancel
+        </Button>
       </ModalFooter>
     </Modal>
   );

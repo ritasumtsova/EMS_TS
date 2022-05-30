@@ -5,7 +5,7 @@ import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { Departments } from './../../types/components/departments';
 
 import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
-import { fetchStart, fetchFailure } from './APIActionCreatos';
+import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
 import DepartmentsAPI from '../../API/Departments';
 
 export const fetchDepartments = (departments: Departments): ActionType => {
@@ -24,11 +24,10 @@ export const fetchDepartmentsThunk = (): AppThunk => {
       const departments: Departments = res.data;
 
       dispatch(fetchDepartments(departments));
-    } catch (err) {
-      const error = err as AxiosError;
-      const errorMessage: string = error.message;
-
-      dispatch(fetchFailure(errorMessage));
+    } catch (error) {
+      dispatch(fetchFailure(error as AxiosError));
     };
+
+    dispatch(fetchEnd());
   };
 };

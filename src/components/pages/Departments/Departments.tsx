@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
 import { fetchDepartmentsThunk } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
+import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
 import AddButton from '../../AddButton/AddButton';
 import NotFound from '../NotFound/NotFound';
@@ -13,7 +14,8 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
-  const { loading ,departments, errorMessage } = departmentsInfo;
+  const {  departments } = departmentsInfo;
+  const { loading, errorMessage } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

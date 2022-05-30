@@ -1,4 +1,4 @@
-import { APIActionTypes } from "../../store/actionTypes/APIActionTypes";
+import { loadingActionTypes } from "../../store/actionTypes/loadingActionTypes";
 import { departmentsActionTypes } from "../../store/actionTypes/departmentsActionTypes";
 import { departmentActionTypes } from "../../store/actionTypes/departmentActionTypes";
 import { authActionTypes } from '../../store/actionTypes/authActionTypes';
@@ -8,11 +8,15 @@ import { Auth } from './../components/auth';
 import { ModalWindowContent } from './../components/modals';
 
 interface FETCH_START {
-  type: APIActionTypes.FETCH_START;
+  type: loadingActionTypes.FETCH_START;
+}
+
+interface FETCH_END {
+  type: loadingActionTypes.FETCH_END;
 }
 
 interface FETCH_FAILURE {
-  type: APIActionTypes.FETCH_FAILURE;
+  type: loadingActionTypes.FETCH_FAILURE;
   payload: string;
 }
 
@@ -38,11 +42,12 @@ interface OPEN_MODAL {
 
 interface CLOSE_MODAL {
   type: modalsActionTypes.CLOSE_MODAL;
-  payload: boolean;
+  payload: ModalWindowContent;
 }
 
 export type ActionType =
   FETCH_START
+  | FETCH_END
   | FETCH_FAILURE
   | FETCH_DEPARTMENTS
   | FETCH_DEPARTMENT_BY_ID

@@ -6,6 +6,7 @@ import { Row } from 'reactstrap';
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { fetchDepartmentByIdThunk } from '../../../store/actionCreators/departmentActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
+import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
@@ -19,7 +20,8 @@ const DepartmentPage: React.FC = () => {
   const { id } = useParams();
 
   const { departmentById } = useSelector(departmentsSelector);
-  const { loading, department, errorMessage } = departmentById;
+  const { department } = departmentById;
+  const { loading, errorMessage } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

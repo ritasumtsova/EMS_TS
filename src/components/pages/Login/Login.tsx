@@ -12,6 +12,7 @@ import {
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { loginThunk } from '../../../store/actionCreators/authActionCreators';
 import { authSelector } from '../../../store/selectors/auth';
+import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
 import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
@@ -22,7 +23,8 @@ const Login: React.FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const { token, errorMessage, loading } = useSelector(authSelector);
+  const { token } = useSelector(authSelector);
+  const { errorMessage, loading } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

@@ -5,7 +5,7 @@ import { Auth } from '../../types/components/auth';
 import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 
 import { authActionTypes } from '../actionTypes/authActionTypes';
-import { fetchStart, fetchFailure } from './APIActionCreatos';
+import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
 import AuthAPI from '../../API/Auth';
 
 export const login = (auth: Auth): ActionType => {
@@ -24,11 +24,10 @@ export const loginThunk = (userName: string, password: string): AppThunk => {
       const auth: Auth = res.data;
 
       dispatch(login(auth));
-    } catch (err) {
-      const error = err as AxiosError;
-      const errorMessage: string = error.message;
-
-      dispatch(fetchFailure(errorMessage));
+    } catch (error) {
+      dispatch(fetchFailure(error as AxiosError));
     };
+
+    dispatch(fetchEnd());
   };
 };
