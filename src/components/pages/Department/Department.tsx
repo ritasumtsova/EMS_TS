@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
-import { fetchDepartmentThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { fetchDepartmentByIdThunk } from '../../../store/actionCreators/departmentActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
+import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
 import AddButton from '../../AddButton/AddButton';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
@@ -19,12 +20,13 @@ const DepartmentPage: React.FC = () => {
   const { id } = useParams();
 
   const { departmentById } = useSelector(departmentsSelector);
-  const { loading, department, errorMessage } = departmentById;
+  const { department } = departmentById;
+  const { loading, errorMessage } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
   const departmentInfo = useMemo(() => {
-    return dispatch(fetchDepartmentThunk(id!));
+    return dispatch(fetchDepartmentByIdThunk(id!));
   }, []);
 
   useEffect(() => {}, [departmentInfo]);
@@ -39,7 +41,11 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <>
-      <AddButton modalForm={<EmployeeForm />} title="Add employee " />
+      <AddButton
+        modalForm={<EmployeeForm />}
+        title="Add employee "
+        name="Add employee"  
+      />
       <Row className="Department">
         <h2>{department?.description}</h2>
         <EmployeesList employees={department?.employees || []} />

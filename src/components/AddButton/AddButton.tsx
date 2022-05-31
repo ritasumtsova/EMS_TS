@@ -1,20 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Col, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import ModalContext from '../../contexts/Modals/ModalContext';
-import { ModalWindowContent } from '../../types/components/modals';
+import { openModal } from '../../store/actionCreators/modalsActionCreators';
 import './AddButton.scss';
 
-const AddButton: React.FC<ModalWindowContent> = ({ title, modalForm }) => {
-  const modalContext = useContext(ModalContext);
+interface AddButtonProps {
+  name: string;
+  title: string;
+  modalForm: JSX.Element
+}
+
+const AddButton: React.FC<AddButtonProps> = ({ name, title, modalForm }) => {
+  const dispatch = useDispatch();
+
+  const modalContent = {
+    name,
+    title,
+    modalForm,
+  };
 
   const openModalHandler = () => {
-    modalContext!.openModal({
-      title,
-      modalForm,
-    });
+    dispatch(openModal(name!, modalContent));
   };
 
   return (

@@ -3,9 +3,7 @@ import { departmentsActionTypes } from '../actionTypes/departmentsActionTypes';
 import { DepartmentsInitState } from "../../types/store/initStateInterfaces";
 
 const initState: DepartmentsInitState = {
-  loading: false,
-  departments: null,
-  errorMessage: ''
+  departments: null
 };
 
 const departmentsReducer = (state: DepartmentsInitState = initState, action: ActionType) => {
@@ -13,23 +11,7 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
     case departmentsActionTypes.FETCH_DEPARTMENTS:
       return {
         ...state,
-        loading: true
-      };
-
-    case departmentsActionTypes.FETCH_DEPARTMENTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        departments: action.payload,
-        errorMessage: ''
-      };
-
-    case departmentsActionTypes.FETCH_DEPARTMENTS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        departments: null,
-        errorMessage: action.payload
+        departments: action.payload
       };
 
     default:

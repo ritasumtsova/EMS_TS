@@ -1,23 +1,33 @@
+import { AxiosResponse, AxiosError } from 'axios';
+
 import { ActionType } from '../../types/store/actionTypes';
-import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
+import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { Departments } from './../../types/components/departments';
 
-export const fetchDepartments = (): ActionType => {
+import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
+import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
+import DepartmentsAPI from '../../API/Departments';
+
+export const fetchDepartments = (departments: Departments): ActionType => {
   return {
     type: departmentsActionTypes.FETCH_DEPARTMENTS,
-  };
-};
-
-export const fetchDepartmentsSuccess = (departments: Departments): ActionType => {
-  return {
-    type: departmentsActionTypes.FETCH_DEPARTMENTS_SUCCESS,
     payload: departments
   };
 };
 
-export const fetchDepartmentsFailure = (errorMessage: string): ActionType => {
-  return {
-    type: departmentsActionTypes.FETCH_DEPARTMENTS_FAILURE,
-    payload: errorMessage
+export const fetchDepartmentsThunk = (): AppThunk => {
+  return async (dispatch: AppThunkDispatch): Promise<void> => {
+    dispatch(fetchStart());
+
+    try {
+      const res: AxiosResponse<Departments> = await DepartmentsAPI.getDepartments();
+      const departments: Departments = res.data;
+
+      dispatch(fetchDepartments(departments));
+    } catch (error) {
+      dispatch(fetchFailure(error as AxiosError));
+    };
+
+    dispatch(fetchEnd());
   };
 };

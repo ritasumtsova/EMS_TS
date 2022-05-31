@@ -2,18 +2,20 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
-import { fetchDepartmentsThunk } from '../../../store/actionCreators/thunks/departmentsThunks';
+import { fetchDepartmentsThunk } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
+import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
 import AddButton from '../../AddButton/AddButton';
 import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
-import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
-  const { loading ,departments, errorMessage } = departmentsInfo;
+  const {  departments } = departmentsInfo;
+  const { loading, errorMessage } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
@@ -33,7 +35,7 @@ const Departments: React.FC = () => {
 
   return (
     <>
-      <AddButton title="Add department " modalForm={<DepartmentForm />} />
+      <AddButton name="Add department" title="Add department " modalForm={<DepartmentForm />}/>
       <DepartmnetsList departments={departments?.data || []} />
     </>
   );
