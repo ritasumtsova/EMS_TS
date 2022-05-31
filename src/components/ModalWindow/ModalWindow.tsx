@@ -12,26 +12,39 @@ import { modalsSelector } from '../../store/selectors/modals';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 
 const ModalWindow: React.FC = () => {
-  const { isOpen, content, activeModals } = useSelector(modalsSelector);
+  const { content, modalsStack } = useSelector(modalsSelector);
+  const currentModalContent = content.at(-1);
 
   const dispatch = useDispatch();
+
+  const isOpen = modalsStack.find((name) => {
+    return name === currentModalContent?.name;
+  });
+
+
 
   return (
     <Modal
       centered
       backdrop
-      isOpen={isOpen}
+      isOpen={!!isOpen}
     >
       <ModalHeader>
-        {content?.title}
+        {currentModalContent?.title}
       </ModalHeader>
       <ModalBody>
-        {content?.modalForm}
+        {currentModalContent?.modalForm}
       </ModalBody>
       <ModalFooter>
-        <Button disabled color="primary" type="submit">Save</Button>
         <Button
-          onClick={() => dispatch(closeModal(activeModals[activeModals.length - 1]))}
+          disabled
+          color="primary"
+          type="submit"
+        >
+          Save
+        </Button>
+        <Button
+          onClick={() => dispatch(closeModal())}
           color="danger"
         >
           Cancel

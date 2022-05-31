@@ -37,12 +37,14 @@ interface LOGIN {
 
 interface OPEN_MODAL {
   type: modalsActionTypes.OPEN_MODAL;
+  name: string;
   payload: ModalWindowContent;
 }
 
 interface CLOSE_MODAL {
   type: modalsActionTypes.CLOSE_MODAL;
-  payload: ModalWindowContent;
+  name?: string;
+  payload?: ModalWindowContent;
 }
 
 export type ActionType =

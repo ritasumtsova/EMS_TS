@@ -4,20 +4,26 @@ import { Col, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { ModalWindowContent } from '../../types/components/modals';
 import { openModal } from '../../store/actionCreators/modalsActionCreators';
-
 import './AddButton.scss';
 
-const AddButton: React.FC<ModalWindowContent> = ({ title, modalForm }) => {
-  const modalContent = {
-    title,
-    modalForm
-  };
+interface AddButtonProps {
+  name: string;
+  title: string;
+  modalForm: JSX.Element
+}
+
+const AddButton: React.FC<AddButtonProps> = ({ name, title, modalForm }) => {
   const dispatch = useDispatch();
 
+  const modalContent = {
+    name,
+    title,
+    modalForm,
+  };
+
   const openModalHandler = () => {
-    dispatch(openModal(modalContent))
+    dispatch(openModal(name!, modalContent));
   };
 
   return (

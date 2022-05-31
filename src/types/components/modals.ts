@@ -1,9 +1,5 @@
 export interface ModalWindowContent {
+  name: string;
   title: string;
   modalForm:  React.ReactNode;
 }
-
-export interface ModalWindowContext {
-  openModal: (modalConfig: ModalWindowContent) => void;
-  closeModal: () => void;
-};

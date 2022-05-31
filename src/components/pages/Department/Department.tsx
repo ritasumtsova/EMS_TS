@@ -41,7 +41,11 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <>
-      <AddButton modalForm={<EmployeeForm />} title="Add employee " />
+      <AddButton
+        modalForm={<EmployeeForm />}
+        title="Add employee "
+        name="Add employee"  
+      />
       <Row className="Department">
         <h2>{department?.description}</h2>
         <EmployeesList employees={department?.employees || []} />
