@@ -3,9 +3,8 @@ import { modalsActionTypes } from '../actionTypes/modalsActionTypes';
 import { ModalsInitState } from "../../types/store/initStateInterfaces";
 
 const initState: ModalsInitState = {
-  isOpen: false,
-  content: null,
-  activeModals: [],
+  modalsStack: [],
+  content: [],
 };
 
 const modalsReducer = (state: ModalsInitState = initState, action: ActionType) => {
@@ -13,23 +12,15 @@ const modalsReducer = (state: ModalsInitState = initState, action: ActionType) =
     case modalsActionTypes.OPEN_MODAL:
       return {
         ...state,
-        isOpen: true,
-        content: action.payload,
-        activeModals: [...state.activeModals, action.payload]
+        modalsStack: [...state.modalsStack, action.name],
+        content: [...state.content, action.payload],
       };
 
     case modalsActionTypes.CLOSE_MODAL:
       return {
         ...state,
-        isOpen: state.activeModals.filter((modal) => {
-          return modal.title !== action.payload.title
-        }).length > 0
-        ? true
-        : false,
-        content: state.activeModals.at(-2),
-        activeModals: state.activeModals.filter((modal) => {
-          return modal.title !== action.payload.title
-        })
+        modalsStack: state.modalsStack.slice(0, -1),
+        content: state.content.slice(0, -1),
       };
 
     default:

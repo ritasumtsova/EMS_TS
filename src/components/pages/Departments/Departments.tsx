@@ -14,8 +14,8 @@ import { formsSelector } from '../../../store/selectors/formsSelectors';
 import AddButton from '../../AddButton/AddButton';
 import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
-import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import DepartmentForm from '../../DepartmentForm/DepartmentForm';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
@@ -46,6 +46,7 @@ const Departments: React.FC = () => {
   return (
     <>
       <AddButton
+        name="Add department"
         title="Add department "
         modalForm={<DepartmentForm />}
         submitHandler={addDepartmentThunk}

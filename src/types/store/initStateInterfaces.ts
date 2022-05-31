@@ -15,9 +15,8 @@ export interface AuthInitState {
 }
 
 export interface ModalsInitState {
-  isOpen: boolean;
-  content: ModalWindowContent | null;
-  activeModals: ModalWindowContent[];
+  modalsStack: string[];
+  content: ModalWindowContent[];
 }
 
 export interface LoadingInitState {

@@ -8,8 +8,8 @@ import { fetchDepartmentByIdThunk } from '../../../store/actionCreators/departme
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
-// import AddButton from '../../AddButton/AddButton';
-// import EmployeeForm from '../../EmployeeForm/EmployeeForm';
+import AddButton from '../../AddButton/AddButton';
+import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
@@ -41,7 +41,12 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <>
-      {/* <AddButton modalForm={<EmployeeForm />} title="Add employee " /> */}
+      <AddButton
+        modalForm={<EmployeeForm />}
+        title="Add employee "
+        name="Add employee" 
+        submitHandler={() => {}} 
+      />
       <Row className="Department">
         <h2>{department?.description}</h2>
         <EmployeesList employees={department?.employees || []} />

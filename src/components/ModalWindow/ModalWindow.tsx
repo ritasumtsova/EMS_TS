@@ -13,35 +13,37 @@ import { formsSelector } from '../../store/selectors/formsSelectors';
 import { Department } from '../../types/components/departments';
 
 const ModalWindow: React.FC = () => {
-  const { isOpen, content, activeModals } = useSelector(modalsSelector);
+  const { content, modalsStack } = useSelector(modalsSelector);
+  const currentModalContent = content.at(-1);
   const { name, description } = useSelector(formsSelector);
+
   const dispatch = useDispatch();
-  // console.log(content?.title);
 
+  let formData: Department | null = null;
   const submitHandler = () => {
-    let formData: Department | null = null;
-
-    if (content?.title) {
-      formData = {
-        name,
-        description
-      }
+    formData = {
+      name,
+      description
     }
     console.log(formData);
+    dispatch(currentModalContent?.submitHandler(name, description));
+  }
 
-    dispatch(content?.submitHandler(formData));
-  };
+  const isOpen = modalsStack.find((name) => {
+    return name === currentModalContent?.name;
+  });
+
   return (
     <Modal
       centered
       backdrop
-      isOpen={isOpen}
+      isOpen={!!isOpen}
     >
       <ModalHeader>
-        {content?.title}
+        {currentModalContent?.title}
       </ModalHeader>
       <ModalBody>
-        {content?.modalForm}
+        {currentModalContent?.modalForm}
       </ModalBody>
       <ModalFooter>
         <Button
@@ -52,7 +54,7 @@ const ModalWindow: React.FC = () => {
           Save
         </Button>
         <Button
-          onClick={() => dispatch(closeModal(activeModals[activeModals.length - 1]))}
+          onClick={() => dispatch(closeModal())}
           color="danger"
         >
           Cancel
