@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { openModal } from '../../store/actionCreators/modalsActionCreators';
+import { modalNames } from '../../types/components/modals';
 import './AddButton.scss';
 
 interface AddButtonProps {
-  name: string;
+  name: modalNames;
   title: string;
   modalForm: JSX.Element
 }

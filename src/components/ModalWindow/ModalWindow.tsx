@@ -21,8 +21,6 @@ const ModalWindow: React.FC = () => {
     return name === currentModalContent?.name;
   });
 
-
-
   return (
     <Modal
       centered
