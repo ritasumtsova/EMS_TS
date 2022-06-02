@@ -53,16 +53,6 @@ interface CLOSE_MODAL {
   payload?: ModalWindowContent;
 }
 
-// interface OPEN_MODAL {
-//   type: modalsActionTypes.OPEN_MODAL;
-//   payload: ModalWindowContent;
-// }
-
-// interface CLOSE_MODAL {
-//   type: modalsActionTypes.CLOSE_MODAL;
-//   payload: ModalWindowContent;
-// }
-
 interface CHANGE_DEPARTMENT_NAME {
   type: formsActionTypes.CHANGE_DEPARTMENT_NAME;
   payload: string;
