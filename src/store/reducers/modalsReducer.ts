@@ -5,6 +5,7 @@ import { ModalsInitState } from "../../types/store/initStateInterfaces";
 const initState: ModalsInitState = {
   modalsStack: [],
   content: [],
+  open: false
 };
 
 const modalsReducer = (state: ModalsInitState = initState, action: ActionType) => {
@@ -14,6 +15,7 @@ const modalsReducer = (state: ModalsInitState = initState, action: ActionType) =
         ...state,
         modalsStack: [...state.modalsStack, action.name],
         content: [...state.content, action.payload],
+        open: true
       };
 
     case modalsActionTypes.CLOSE_MODAL:
@@ -21,6 +23,7 @@ const modalsReducer = (state: ModalsInitState = initState, action: ActionType) =
         ...state,
         modalsStack: state.modalsStack.slice(0, -1),
         content: state.content.slice(0, -1),
+        open: !!(state.modalsStack.length > 1)
       };
 
     default:

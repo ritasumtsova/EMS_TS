@@ -8,24 +8,18 @@ import {
 } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
-import { formsSelector } from '../../../store/selectors/formsSelectors';
-
 
 import AddButton from '../../AddButton/AddButton';
 import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import DepartmentForm from '../../DepartmentForm/DepartmentForm';
+import { modalNames } from '../../../types/components/modals';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
   const { departments } = departmentsInfo;
   const { loading, errorMessage } = useSelector(loadingSelector);
-  const { name, description } = useSelector(formsSelector);
-  const data = {
-    name,
-    description
-  };
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
@@ -46,10 +40,10 @@ const Departments: React.FC = () => {
   return (
     <>
       <AddButton
-        name="Add department"
+        submitHandler={addDepartmentThunk}
+        name={modalNames.ADD_DEPARTMENT}
         title="Add department "
         modalForm={<DepartmentForm />}
-        submitHandler={addDepartmentThunk}
       />
       <DepartmnetsList departments={departments?.data || []} />
     </>

@@ -10,34 +10,35 @@ import {
 import { modalsSelector } from '../../store/selectors/modals';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 import { formsSelector } from '../../store/selectors/formsSelectors';
+import { modalNames } from '../../types/components/modals';
 import { Department } from '../../types/components/departments';
+import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 
 const ModalWindow: React.FC = () => {
-  const { content, modalsStack } = useSelector(modalsSelector);
+  const { content, open } = useSelector(modalsSelector);
   const currentModalContent = content.at(-1);
   const { name, description } = useSelector(formsSelector);
 
   const dispatch = useDispatch();
+  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
-  let formData: Department | null = null;
   const submitHandler = () => {
-    formData = {
-      name,
-      description
-    }
-    console.log(formData);
-    dispatch(currentModalContent?.submitHandler(name, description));
-  }
+    if (currentModalContent?.name === modalNames.ADD_DEPARTMENT
+      && currentModalContent?.submitHandler) {
+      const data: Department = {
+        name,
+        description
+      };
 
-  const isOpen = modalsStack.find((name) => {
-    return name === currentModalContent?.name;
-  });
+      thunkDispatch(currentModalContent?.submitHandler(data));
+    }
+  };
 
   return (
     <Modal
       centered
       backdrop
-      isOpen={!!isOpen}
+      isOpen={open}
     >
       <ModalHeader>
         {currentModalContent?.title}

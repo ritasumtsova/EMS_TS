@@ -32,22 +32,22 @@ export const fetchDepartmentsThunk = (): AppThunk => {
   };
 };
 
-export const addDepartment = (department: Department): ActionType => {
+export const addDepartment = (newDepartment: Department): ActionType => {
   return {
     type: departmentsActionTypes.ADD_DEPARTMENT,
-    payload: department
+    payload: newDepartment
   }
 };
 
-export const addDepartmentThunk = (name: string, description: string): AppThunk => {
+export const addDepartmentThunk = (data: Department): AppThunk => {
   return async (dispatch: AppThunkDispatch): Promise<void> => {
     dispatch(fetchStart());
 
     try {
-      const res: AxiosResponse<Department> = await DepartmentsAPI.addDepartment(name, description);
-      const department: Department = res.data;
+      const res: AxiosResponse<Department> = await DepartmentsAPI.addDepartment(data);
+      const newDepartment: Department = res.data;
 
-      dispatch(addDepartment(department));
+      dispatch(addDepartment(newDepartment));
     } catch (error) {
       dispatch(fetchFailure(error as AxiosError));
     };
