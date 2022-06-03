@@ -8,14 +8,13 @@ import { openModal } from '../../store/actionCreators/modalsActionCreators';
 import { ModalWindowContent } from '../../types/components/modals';
 import './AddButton.scss';
 
-const AddButton: React.FC<ModalWindowContent> = ({ name, title, modalForm, submitHandler }) => {
+const AddButton: React.FC<ModalWindowContent> = ({ name, title, modalForm }) => {
   const dispatch = useDispatch();
 
   const modalContent = {
     name,
     title,
-    modalForm,
-    submitHandler
+    modalForm
   };
 
   const openModalHandler = () => {

@@ -50,8 +50,10 @@ interface OPEN_MODAL {
 
 interface CLOSE_MODAL {
   type: modalsActionTypes.CLOSE_MODAL;
-  name?: string;
-  payload?: ModalWindowContent;
+}
+
+interface CLOSE_ALL_MODALS {
+  type: modalsActionTypes.CLOSE_ALL_MODALS;
 }
 
 interface ADD_EMPLOYEE {
@@ -69,4 +71,5 @@ export type ActionType =
   | LOGIN
   | OPEN_MODAL
   | CLOSE_MODAL
+  | CLOSE_ALL_MODALS
   | ADD_EMPLOYEE;

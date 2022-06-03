@@ -26,6 +26,14 @@ const modalsReducer = (state: ModalsInitState = initState, action: ActionType) =
         open: !!(state.modalsStack.length > 1)
       };
 
+    case modalsActionTypes.CLOSE_ALL_MODALS:
+      return {
+        ...state,
+        modalsStack: [],
+        content: [],
+        open: false
+      };
+
     default:
       return state;
   }

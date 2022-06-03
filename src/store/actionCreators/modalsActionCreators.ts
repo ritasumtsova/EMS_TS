@@ -15,3 +15,9 @@ export const closeModal = (): ActionType => {
     type: modalsActionTypes.CLOSE_MODAL,
   };
 };
+
+export const closeAllModals = (): ActionType => {
+  return {
+    type: modalsActionTypes.CLOSE_ALL_MODALS,
+  };
+};
