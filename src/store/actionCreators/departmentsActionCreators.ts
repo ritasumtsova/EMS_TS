@@ -1,3 +1,5 @@
+import { modalNames } from './../../types/components/modals';
+import { openModal } from './modalsActionCreators';
 import { AxiosResponse, AxiosError } from 'axios';
 
 import { ActionType } from '../../types/store/actionTypes';
@@ -50,8 +52,8 @@ export const addDepartmentThunk = (data: Department): AppThunk => {
       dispatch(addDepartment(newDepartment));
     } catch (error) {
       dispatch(fetchFailure(error as AxiosError));
-    };
-
-    dispatch(fetchEnd());
+    } finally {
+      dispatch(fetchEnd());
+    }
   };
 };

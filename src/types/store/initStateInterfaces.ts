@@ -1,3 +1,4 @@
+import { Employee } from './../components/employees';
 import { Departments, Department } from '../components/departments';
 import { Auth } from '../components/auth';
 import { ModalWindowContent } from '../components/modals';
@@ -23,9 +24,8 @@ export interface ModalsInitState {
 export interface LoadingInitState {
   loading: boolean;
   errorMessage: string;
-};
+}
 
-export interface FormInitState {
-  name: string;
-  description: string;
-};
+export interface EmployeesInitState {
+  employees: null | Employee[];
+}

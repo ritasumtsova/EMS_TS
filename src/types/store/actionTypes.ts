@@ -1,4 +1,4 @@
-import { formsActionTypes } from './../../store/actionTypes/formsActionTypes';
+import { Employee } from './../components/employees';
 import { loadingActionTypes } from '../../store/actionTypes/loadingActionTypes';
 import { departmentsActionTypes } from '../../store/actionTypes/departmentsActionTypes';
 import { departmentActionTypes } from '../../store/actionTypes/departmentActionTypes';
@@ -7,6 +7,7 @@ import { modalsActionTypes } from '../../store/actionTypes/modalsActionTypes';
 import { Departments, Department } from '../components/departments';
 import { Auth } from './../components/auth';
 import { ModalWindowContent } from './../components/modals';
+import { employeesActionTypes } from '../../store/actionTypes/employeesActionTypes';
 
 interface FETCH_START {
   type: loadingActionTypes.FETCH_START;
@@ -53,14 +54,9 @@ interface CLOSE_MODAL {
   payload?: ModalWindowContent;
 }
 
-interface CHANGE_DEPARTMENT_NAME {
-  type: formsActionTypes.CHANGE_DEPARTMENT_NAME;
-  payload: string;
-}
-
-interface CHANGE_DEPARTMENT_DESCRIPTION {
-  type: formsActionTypes.CHANGE_DEPARTMENT_DESCRIPTION;
-  payload: string;
+interface ADD_EMPLOYEE {
+  type: employeesActionTypes.ADD_EMPLOYEE;
+  payload: Employee | null;
 }
 
 export type ActionType =
@@ -73,5 +69,4 @@ export type ActionType =
   | LOGIN
   | OPEN_MODAL
   | CLOSE_MODAL
-  | CHANGE_DEPARTMENT_NAME
-  | CHANGE_DEPARTMENT_DESCRIPTION;
+  | ADD_EMPLOYEE;

@@ -4,15 +4,13 @@ import departmentReducer from './departmentReducer';
 import departmentsReducer from './departmentsReducer';
 import modalsReducer from './modalsReducer';
 import loadingReducer from './loadingReducer';
-import formsReducer from './formsReducer';
 
 const rootReducer = combineReducers({
   departments: departmentsReducer,
   department: departmentReducer,
   auth: authReducer,
   modals: modalsReducer,
-  loading: loadingReducer,
-  forms: formsReducer
+  loading: loadingReducer
 });
 
 export default rootReducer;
