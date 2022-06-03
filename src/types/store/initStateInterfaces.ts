@@ -1,3 +1,4 @@
+import { UserData } from './../components/auth';
 import { Departments, Department } from '../components/departments';
 import { Auth } from '../components/auth';
 import { ModalWindowContent } from '../components/modals';
@@ -12,6 +13,7 @@ export interface DepartmentInitState {
 
 export interface AuthInitState {
   token: null | Auth;
+  userData: UserData | null;
 }
 
 export interface ModalsInitState {

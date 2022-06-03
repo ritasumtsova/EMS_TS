@@ -1,3 +1,4 @@
+import { UserData } from './../types/components/auth';
 import { AxiosResponse } from 'axios';
 
 import { Auth } from '../types/components/auth';
@@ -9,10 +10,10 @@ const AuthAPI = {
     baseURL: process.env.REACT_APP_BASEURL,
   }),
 
-  login(userName: string, password: string): Promise<AxiosResponse<Auth>> {
+  login(userData: UserData): Promise<AxiosResponse<Auth>> {
     return AuthAPI.CONFIG.post('user/login', {
-      userName,
-      password,
+      userName: userData.userName,
+      password: userData.password
     });
   },
 };

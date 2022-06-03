@@ -1,33 +1,17 @@
-import { AxiosResponse, AxiosError } from 'axios';
-
 import { ActionType } from '../../types/store/actionTypes';
-import { Auth } from '../../types/components/auth';
-import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
-
+import { Auth, UserData } from '../../types/components/auth';
 import { authActionTypes } from '../actionTypes/authActionTypes';
-import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
-import AuthAPI from '../../API/Auth';
 
-export const login = (auth: Auth): ActionType => {
+export const fetchToken = (auth: Auth): ActionType => {
   return {
-    type: authActionTypes.LOGIN,
+    type: authActionTypes.FETCH_TOKEN,
     payload: auth
   };
 };
 
-export const loginThunk = (userName: string, password: string): AppThunk => {
-  return async (dispatch: AppThunkDispatch): Promise<void> => {
-    dispatch(fetchStart());
-
-    try {
-      const res: AxiosResponse<Auth> = await AuthAPI.login(userName, password);
-      const auth: Auth = res.data;
-
-      dispatch(login(auth));
-    } catch (error) {
-      dispatch(fetchFailure(error as AxiosError));
-    };
-
-    dispatch(fetchEnd());
+export const fetchLogin = (userData: UserData): ActionType => {
+  return {
+    type: authActionTypes.FETCH_LOGIN,
+    payload: userData
   };
 };

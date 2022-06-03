@@ -5,7 +5,7 @@ import { departmentActionTypes } from '../../store/actionTypes/departmentActionT
 import { authActionTypes } from '../../store/actionTypes/authActionTypes';
 import { modalsActionTypes } from '../../store/actionTypes/modalsActionTypes';
 import { Departments, Department } from '../components/departments';
-import { Auth } from './../components/auth';
+import { Auth, UserData } from './../components/auth';
 import { ModalWindowContent } from './../components/modals';
 
 interface FETCH_START {
@@ -36,8 +36,13 @@ interface ADD_DEPARTMENT {
   payload: Department | null;
 }
 
-interface LOGIN {
-  type: authActionTypes.LOGIN;
+export interface FETCH_LOGIN {
+  type: authActionTypes.FETCH_LOGIN;
+  payload: UserData;
+}
+
+interface FETCH_TOKEN {
+  type: authActionTypes.FETCH_TOKEN;
   payload: Auth;
 }
 
@@ -70,7 +75,8 @@ export type ActionType =
   | FETCH_DEPARTMENTS
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
-  | LOGIN
+  | FETCH_LOGIN
+  | FETCH_TOKEN
   | OPEN_MODAL
   | CLOSE_MODAL
   | CHANGE_DEPARTMENT_NAME
