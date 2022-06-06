@@ -3,6 +3,7 @@ import { ActionType } from '../../types/store/actionTypes';
 import { loadingActionTypes } from '../actionTypes/loadingActionTypes';
 
 export const fetchStart = (): ActionType => {
+  console.log('fetch start');
   return {
     type: loadingActionTypes.FETCH_START,
   };
