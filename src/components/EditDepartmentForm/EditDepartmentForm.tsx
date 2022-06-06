@@ -1,12 +1,17 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Row } from 'reactstrap';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 import { editDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
+import { modalsSelector } from '../../store/selectors/modals';
 
 const EditDepartmentForm: React.FC = () => {
   const descritpionRef = useRef<HTMLInputElement | null>(null);
+
+  const { content } = useSelector(modalsSelector);
+  const department = content.at(-1);
+
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();
 
@@ -15,7 +20,7 @@ const EditDepartmentForm: React.FC = () => {
       e.preventDefault();
 
       const data = {
-        departmentId: '',
+        _id: department?.departmentId!,
         description: descritpionRef!.current!.value
       };
       

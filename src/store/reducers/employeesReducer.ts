@@ -14,6 +14,16 @@ const employeesReducer = (state: EmployeesInitState = initState, action: ActionT
         employees: [...state.employees!, action.payload]
       };
 
+    case employeesActionTypes.EDIT_EMPLOYEE:
+      const updatedEmployee = state!.employees!.findIndex((employee) => {
+        return employee._id === action.payload?._id;
+      });
+  
+      return {
+        ...state,
+        employees: state.employees?.splice(updatedEmployee, 1, action.payload!)
+      };
+
     default:
       return state;
   }

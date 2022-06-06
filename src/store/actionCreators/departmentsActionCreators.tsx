@@ -81,7 +81,7 @@ export const editDepartmentThunk = (data: EditDepartment): AppThunk => {
       console.log(res);
       const department: Department = res.data;
 
-      dispatch(addDepartment(department));
+      dispatch(editDepartment(department));
       dispatch(openModal(modalNames.SUCCESS, editDepartmentContent));
     } catch (error) {
       console.log(error);

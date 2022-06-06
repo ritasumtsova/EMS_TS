@@ -21,9 +21,13 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
       };
 
     case departmentsActionTypes.EDIT_DEPARTMENT:
+      const updatedDepartment = state!.departments!.data.findIndex((department) => {
+        return department._id === action.payload?._id;
+      });
+
       return {
         ...state,
-        department: action.payload
+        departments: state.departments?.data.splice(updatedDepartment, 1, action.payload!)
       };
 
     default:

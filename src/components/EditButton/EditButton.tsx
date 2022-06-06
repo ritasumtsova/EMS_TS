@@ -8,7 +8,8 @@ const EditButton: React.FC<ModalWindowContent> = ({
   name,
   title,
   modalForm,
-  departmentId
+  departmentId,
+  employeeId,
 }) => {
   const dispatch = useDispatch();
 
@@ -16,7 +17,8 @@ const EditButton: React.FC<ModalWindowContent> = ({
     name,
     title,
     modalForm,
-    departmentId
+    departmentId,
+    employeeId
   };
 
   const openModalHandler = () => {
