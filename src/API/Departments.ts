@@ -1,6 +1,10 @@
 import { AxiosResponse } from 'axios';
 
-import { Department, Departments } from '../types/components/departments';
+import {
+  Department,
+  Departments,
+  EditDepartment
+} from '../types/components/departments';
 
 const axios = require('axios');
 
@@ -27,8 +31,8 @@ const DepartmentsAPI = {
     });
   },
 
-  editDepartment(data: Department): Promise<AxiosResponse<Department>> {
-    return DepartmentsAPI.CONFIG.post(`/department/${data._id}`, {
+  editDepartment(data: EditDepartment): Promise<AxiosResponse<Department>> {
+    return DepartmentsAPI.CONFIG.patch(`/department/${data._id}`, {
       description: data.description
     });
   },

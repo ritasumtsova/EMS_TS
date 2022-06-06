@@ -5,8 +5,8 @@ import { Col, Row, Button } from 'reactstrap';
 import { Department } from '../../types/components/departments';
 import { modalNames, modalTitles } from '../../types/components/modals';
 import DeleteButton from '../DeleteButton/DeleteButton';
-import DepartmentForm from '../DepartmentForm/DepartmentForm';
 import EditButton from '../EditButton/EditButton';
+import EditDepartmentForm from '../EditDepartmentForm/EditDepartmentForm';
 import NotFound from '../pages/NotFound/NotFound';
 import './DepartmentsList.scss';
 
@@ -34,7 +34,8 @@ const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
               <EditButton
                 name={modalNames.EDIT_DEPARTMENT}
                 title={modalTitles.EDIT_DEPARTMENT}
-                modalForm={<DepartmentForm />}
+                modalForm={<EditDepartmentForm />}
+                departmentId={department._id!}
               />
               <DeleteButton />
             </Col>

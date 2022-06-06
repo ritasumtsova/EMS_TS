@@ -21,6 +21,12 @@ const EmployeesAPI = {
       lastName: data.lastName
     });
   },
+
+  // editEmployee(data: Employee): Promise<AxiosResponse> {
+  //   return EmployeesAPI.CONFIG.patch(`/department/${data._id}`, {
+  //     description: data.description
+  //   });
+  // },
 };
 
 export default EmployeesAPI;

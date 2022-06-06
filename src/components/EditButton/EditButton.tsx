@@ -4,13 +4,19 @@ import { Button } from 'reactstrap';
 import { openModal } from '../../store/actionCreators/modalsActionCreators';
 import { ModalWindowContent } from '../../types/components/modals';
 
-const EditButton: React.FC<ModalWindowContent> = ({ name, title, modalForm }) => {
+const EditButton: React.FC<ModalWindowContent> = ({
+  name,
+  title,
+  modalForm,
+  departmentId
+}) => {
   const dispatch = useDispatch();
 
   const modalContent = {
     name,
     title,
-    modalForm
+    modalForm,
+    departmentId
   };
 
   const openModalHandler = () => {
