@@ -13,7 +13,7 @@ import EmployeeForm from '../../EmployeeForm/EmployeeForm';
 import EmployeesList from '../../EmployeesList/EmployeesList';
 import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import { modalNames } from '../../../types/components/modals';
+import { modalNames, modalTitles } from '../../../types/components/modals';
 
 import './Department.scss';
 
@@ -44,7 +44,7 @@ const DepartmentPage: React.FC = () => {
     <>
       <AddButton
         modalForm={<EmployeeForm />}
-        title="Add employee "
+        title={modalTitles.ADD_EMPLOYEE}
         name={modalNames.ADD_EMPLOYEE}  
       />
       <Row className="Department">

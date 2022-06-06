@@ -5,10 +5,10 @@ import { AxiosResponse, AxiosError } from 'axios';
 import { ActionType } from '../../types/store/actionTypes';
 import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { Department, Departments } from '../../types/components/departments';
+import { addDepartmentContent, failureContent } from '../../types/components/modalsContent';
 
 import { departmentsActionTypes } from '../actionTypes/departmentsActionTypes';
 import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
-import { modalContentSuccess, modalContentFailure } from '../../types/components/modals';
 import DepartmentsAPI from '../../API/Departments';
 
 export const fetchDepartments = (departments: Departments): ActionType => {
@@ -51,10 +51,10 @@ export const addDepartmentThunk = (data: Department): AppThunk => {
       const newDepartment: Department = res.data;
 
       dispatch(addDepartment(newDepartment));
-      dispatch(openModal(modalNames.SUCCESS, modalContentSuccess));
+      dispatch(openModal(modalNames.SUCCESS, addDepartmentContent));
     } catch (error) {
       dispatch(fetchFailure(error as AxiosError));
-      dispatch(openModal(modalNames.FAILURE, modalContentFailure));
+      dispatch(openModal(modalNames.FAILURE, failureContent));
     } finally {
       dispatch(fetchEnd());
     }

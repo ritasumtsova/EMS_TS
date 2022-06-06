@@ -2,11 +2,8 @@ import { AxiosResponse, AxiosError } from 'axios';
 import { ActionType } from '../../types/store/actionTypes';
 import { employeesActionTypes } from './../actionTypes/employeesActionTypes';
 import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
-import {
-  modalNames,
-  modalContentSuccess,
-  modalContentFailure
-} from '../../types/components/modals';
+import { addEmployeeContent, failureContent } from './../../types/components/modalsContent';
+import { modalNames } from '../../types/components/modals';
 import { Employee } from './../../types/components/employees';
 import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
 import { openModal } from './modalsActionCreators';
@@ -26,14 +23,12 @@ export const addEmployeeThunk = (data: Employee): AppThunk => {
     try {
       const res: AxiosResponse<Employee> = await EmployeesAPI.addEmployee(data);
       const newEmployee: Employee = res.data;
-      console.log(res);
 
       dispatch(addEmployee(newEmployee));
-      dispatch(openModal(modalNames.SUCCESS, modalContentSuccess));
-      dispatch(openModal(modalNames.FAILURE, modalContentFailure));
+      dispatch(openModal(modalNames.SUCCESS, addEmployeeContent));
     } catch (error) {
-      console.error(error);
       dispatch(fetchFailure(error as AxiosError));
+      dispatch(openModal(modalNames.FAILURE, failureContent));
     } finally {
       dispatch(fetchEnd());
     }

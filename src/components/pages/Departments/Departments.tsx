@@ -11,7 +11,7 @@ import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import DepartmentForm from '../../DepartmentForm/DepartmentForm';
-import { modalNames } from '../../../types/components/modals';
+import { modalNames, modalTitles } from '../../../types/components/modals';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
@@ -38,7 +38,7 @@ const Departments: React.FC = () => {
     <>
       <AddButton
         name={modalNames.ADD_DEPARTMENT}
-        title="Add department "
+        title={modalTitles.ADD_DEPARTMENT}
         modalForm={<DepartmentForm />}
       />
       <DepartmnetsList departments={departments?.data || []} />
