@@ -7,14 +7,16 @@ interface DeleteButtonProps {
   name: string;
   title: string;
   modalForm: JSX.Element;
-  id: string;
+  employeeId?: string;
+  departmentId: string;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({
   name,
   title,
   modalForm,
-  id
+  employeeId,
+  departmentId
 }) => {
   const dispatch = useDispatch();
 
@@ -22,7 +24,8 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
     name,
     title,
     modalForm,
-    id
+    employeeId,
+    departmentId
   };
 
   const openModalHandler = () => {

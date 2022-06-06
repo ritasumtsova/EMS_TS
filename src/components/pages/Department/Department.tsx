@@ -49,7 +49,9 @@ const DepartmentPage: React.FC = () => {
       />
       <Row className="Department">
         <h2>{department?.description}</h2>
-        <EmployeesList employees={department?.employees || []} />
+        <EmployeesList
+          employees={department?.employees || []}
+          departmentId={id!}/>
       </Row>
     </>
   );

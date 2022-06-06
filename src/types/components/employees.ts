@@ -5,3 +5,8 @@ export interface Employee {
   lastName: string;
   userName: string;
 }
+
+export interface EmployeeIds {
+  departmentId: string;
+  employeeId: string;
+}

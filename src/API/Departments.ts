@@ -28,7 +28,7 @@ const DepartmentsAPI = {
   },
 
   deleteDepartment(id: string): Promise<AxiosResponse> {
-    return DepartmentsAPI.CONFIG.post(`/department/${id}`);
+    return DepartmentsAPI.CONFIG.delete(`/department/${id}`);
   },
 };
 

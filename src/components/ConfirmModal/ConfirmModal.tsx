@@ -6,6 +6,7 @@ import { closeModal } from '../../store/actionCreators/modalsActionCreators';
 import { deleteDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
 import { useSelector } from 'react-redux';
 import { modalsSelector } from '../../store/selectors/modals';
+import { deleteEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
 
 const ConfirmModal: React.FC = () => {
   const { content } = useSelector(modalsSelector);
@@ -16,14 +17,23 @@ const ConfirmModal: React.FC = () => {
 
   const submitHandler = useCallback(
     () => {
-      thunkDispatch(deleteDepartmentThunk(currentModalContent?.id!));
+      if (currentModalContent?.employeeId) {
+        const data = {
+          departmentId: currentModalContent.departmentId!,
+          employeeId: currentModalContent.employeeId
+        };
+
+        thunkDispatch(deleteEmployeeThunk(data))
+      } else {
+        thunkDispatch(deleteDepartmentThunk(currentModalContent?.departmentId!));
+      }
     }, [thunkDispatch]
   )
 
   return (
     <Container className="ConfirmModal">
       <h6 className="ConfirmModal__message">
-        Are you sure you want to delete the department?
+        Are you sure?
       </h6>
       <Row className="ConfirmModal__footer">
         <Button onClick={submitHandler} color="primary">

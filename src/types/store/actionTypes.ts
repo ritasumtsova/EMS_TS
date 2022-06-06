@@ -66,6 +66,11 @@ interface ADD_EMPLOYEE {
   payload: Employee | null;
 }
 
+interface DELETE_EMPLOYEE {
+  type: employeesActionTypes.DELETE_EMPLOYEE;
+  payload: any;
+}
+
 export type ActionType =
   FETCH_START
   | FETCH_END
@@ -78,4 +83,5 @@ export type ActionType =
   | OPEN_MODAL
   | CLOSE_MODAL
   | CLOSE_ALL_MODALS
-  | ADD_EMPLOYEE;
+  | ADD_EMPLOYEE
+  | DELETE_EMPLOYEE;

@@ -14,6 +14,14 @@ const employeesReducer = (state: EmployeesInitState = initState, action: ActionT
         employees: [...state.employees!, action.payload]
       };
 
+    case employeesActionTypes.DELETE_EMPLOYEE:
+      return {
+        ...state,
+        employees: state.employees?.filter((employee) => {
+          return employee._id !== action.payload.employeeId
+        })
+      };
+
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Employee } from '../types/components/employees';
+import { Employee, EmployeeIds } from '../types/components/employees';
 
 const axios = require('axios');
 
@@ -20,6 +20,10 @@ const EmployeesAPI = {
       firstName: data.firstName,
       lastName: data.lastName
     });
+  },
+
+  deleteEmployee(data: EmployeeIds): Promise<AxiosResponse> {
+    return EmployeesAPI.CONFIG.delete(`employee/${data.employeeId}/department/${data.departmentId}`);
   },
 };
 

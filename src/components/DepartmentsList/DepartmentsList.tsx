@@ -36,7 +36,7 @@ const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
                 name={modalNames.DELETE_DEPARTMENT}
                 title={modalTitles.DELETE_DEPARTMENT}
                 modalForm={<ConfirmModal />}
-                id={department._id!}
+                departmentId={department._id!}
               />
             </Col>
           </Row>

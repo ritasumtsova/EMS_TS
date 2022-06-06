@@ -11,9 +11,10 @@ import './EmployeesList.scss';
 
 interface EmployeesListProps {
   employees: Employee[];
+  departmentId: string;
 }
 
-const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
+const EmployeesList: React.FC<EmployeesListProps> = ({ departmentId, employees }) => {
   if (employees.length === 0) {
     return <NotFound />;
   }
@@ -33,7 +34,8 @@ const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
                 name={modalNames.DELETE_EMPLOYEE}
                 title={modalTitles.DELETE_EMPLOYEE}
                 modalForm={<ConfirmModal />}
-                id={employee._id!}
+                employeeId={employee._id!}
+                departmentId={departmentId}
               />
             </Col>
           </React.Fragment>

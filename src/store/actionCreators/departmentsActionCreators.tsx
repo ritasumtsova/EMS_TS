@@ -5,7 +5,7 @@ import { AxiosResponse, AxiosError } from 'axios';
 import { ActionType } from '../../types/store/actionTypes';
 import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { Department, Departments } from '../../types/components/departments';
-import { addDepartmentContent, failureContent } from '../../types/components/modalsContent';
+import { addDepartmentContent, deleteDepartmentContent, failureContent } from '../../types/components/modalsContent';
 
 import { departmentsActionTypes } from '../actionTypes/departmentsActionTypes';
 import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
@@ -71,16 +71,12 @@ export const deleteDepartment = (id: string): ActionType => {
 export const deleteDepartmentThunk = (id: string): AppThunk => {
   return async (dispatch: AppThunkDispatch): Promise<void> => {
     dispatch(fetchStart());
-    console.log(1);
     try {
-      console.log(2);
       const res: AxiosResponse = await DepartmentsAPI.deleteDepartment(id);
       console.log(res);
-      // const newDepartment: Department = res.data;
 
       dispatch(deleteDepartment(id));
-      console.log(3);
-      dispatch(openModal(modalNames.SUCCESS, addDepartmentContent));
+      dispatch(openModal(modalNames.SUCCESS, deleteDepartmentContent));
     } catch (error) {
       console.error(error);
       dispatch(fetchFailure(error as AxiosError));
