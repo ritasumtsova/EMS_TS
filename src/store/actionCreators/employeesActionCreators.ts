@@ -1,11 +1,15 @@
 import { AxiosResponse, AxiosError } from 'axios';
-
 import { ActionType } from '../../types/store/actionTypes';
-import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
-import { Employee } from './../../types/components/employees';
-
 import { employeesActionTypes } from './../actionTypes/employeesActionTypes';
+import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
+import {
+  modalNames,
+  modalContentSuccess,
+  modalContentFailure
+} from '../../types/components/modals';
+import { Employee } from './../../types/components/employees';
 import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
+import { openModal } from './modalsActionCreators';
 import EmployeesAPI from '../../API/Employees';
 
 export const addEmployee = (newEmployee: Employee): ActionType => {
@@ -25,6 +29,8 @@ export const addEmployeeThunk = (data: Employee): AppThunk => {
       console.log(res);
 
       dispatch(addEmployee(newEmployee));
+      dispatch(openModal(modalNames.SUCCESS, modalContentSuccess));
+      dispatch(openModal(modalNames.FAILURE, modalContentFailure));
     } catch (error) {
       console.error(error);
       dispatch(fetchFailure(error as AxiosError));

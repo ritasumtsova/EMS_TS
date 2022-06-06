@@ -1,3 +1,5 @@
+import MessageModal from "../../components/MessageModal/MessageModal";
+
 export interface ModalWindowContent {
   name: string;
   title: string;
@@ -13,4 +15,16 @@ export enum modalNames {
   DELETE_EMPLOYEE = 'DELETE_EMPLOYEE',
   SUCCESS = 'SUCCESS',
   FAILURE = 'FAILURE'
+};
+
+export const modalContentSuccess: ModalWindowContent = {
+  name: modalNames.SUCCESS,
+  title: 'Success!',
+  modalForm: <MessageModal title="Success!"/>
+};
+
+export const modalContentFailure: ModalWindowContent = {
+  name: modalNames.FAILURE,
+  title: 'Error',
+  modalForm: <MessageModal title="Error"/>
 };
