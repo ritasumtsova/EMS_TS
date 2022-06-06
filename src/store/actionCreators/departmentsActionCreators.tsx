@@ -60,3 +60,33 @@ export const addDepartmentThunk = (data: Department): AppThunk => {
     }
   };
 };
+
+export const deleteDepartment = (id: string): ActionType => {
+  return {
+    type: departmentsActionTypes.DELETE_DEPARTMENT,
+    payload: id
+  }
+};
+
+export const deleteDepartmentThunk = (id: string): AppThunk => {
+  return async (dispatch: AppThunkDispatch): Promise<void> => {
+    dispatch(fetchStart());
+    console.log(1);
+    try {
+      console.log(2);
+      const res: AxiosResponse = await DepartmentsAPI.deleteDepartment(id);
+      console.log(res);
+      // const newDepartment: Department = res.data;
+
+      dispatch(deleteDepartment(id));
+      console.log(3);
+      dispatch(openModal(modalNames.SUCCESS, addDepartmentContent));
+    } catch (error) {
+      console.error(error);
+      dispatch(fetchFailure(error as AxiosError));
+      dispatch(openModal(modalNames.FAILURE, failureContent));
+    } finally {
+      dispatch(fetchEnd());
+    }
+  };
+};

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'reactstrap';
 
 import { Department } from '../../types/components/departments';
+import { modalNames, modalTitles } from '../../types/components/modals';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import NotFound from '../pages/NotFound/NotFound';
@@ -30,7 +32,12 @@ const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
                 <Button color="success">Employees</Button>
               </Link>
               <EditButton />
-              <DeleteButton />
+              <DeleteButton
+                name={modalNames.DELETE_DEPARTMENT}
+                title={modalTitles.DELETE_DEPARTMENT}
+                modalForm={<ConfirmModal />}
+                id={department._id!}
+              />
             </Col>
           </Row>
         );

@@ -20,6 +20,14 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
         department: action.payload
       };
 
+    case departmentsActionTypes.DELETE_DEPARTMENT:
+        return {
+          ...state,
+          departments: state.departments?.data.filter((department) =>{
+            return department._id !== action.payload;
+          })
+        };
+
     default:
       return state;
   }

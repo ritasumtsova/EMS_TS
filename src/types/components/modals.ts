@@ -2,6 +2,7 @@ export interface ModalWindowContent {
   name: string;
   title: string;
   modalForm:  React.ReactNode;
+  id?: string;
 }
 
 export enum modalNames {

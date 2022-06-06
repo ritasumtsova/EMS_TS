@@ -26,6 +26,10 @@ const DepartmentsAPI = {
       description: data.description
     });
   },
+
+  deleteDepartment(id: string): Promise<AxiosResponse> {
+    return DepartmentsAPI.CONFIG.post(`/department/${id}`);
+  },
 };
 
 export default DepartmentsAPI;
