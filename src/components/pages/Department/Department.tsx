@@ -43,7 +43,7 @@ const DepartmentPage: React.FC = () => {
   return (
     <>
       <AddButton
-        modalForm={<EmployeeForm />}
+        modalForm={<EmployeeForm id={id!}/>}
         title={modalTitles.ADD_EMPLOYEE}
         name={modalNames.ADD_EMPLOYEE}  
       />

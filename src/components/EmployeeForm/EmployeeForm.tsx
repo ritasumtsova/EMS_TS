@@ -7,7 +7,11 @@ import { addEmployeeThunk } from '../../store/actionCreators/employeesActionCrea
 import { Employee } from '../../types/components/employees';
 import './EmployeeForm.scss';
 
-const EmployeeForm: React.FC = () => {
+interface EmployeeFormProps {
+  id: string;
+}
+
+const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
   const firstName = useRef<HTMLInputElement | null>(null);
   const lastName = useRef<HTMLInputElement | null>(null);
   const userName = useRef<HTMLInputElement | null>(null);
@@ -20,6 +24,7 @@ const EmployeeForm: React.FC = () => {
       e.preventDefault();
 
       const data: Employee = {
+        _id: id,
         firstName: firstName!.current!.value,
         lastName: lastName!.current!.value,
         userName: userName!.current!.value,
