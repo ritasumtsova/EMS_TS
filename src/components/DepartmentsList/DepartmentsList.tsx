@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'reactstrap';
 
 import { Department } from '../../types/components/departments';
+import { modalNames, modalTitles } from '../../types/components/modals';
 import DeleteButton from '../DeleteButton/DeleteButton';
+import DepartmentForm from '../DepartmentForm/DepartmentForm';
 import EditButton from '../EditButton/EditButton';
 import NotFound from '../pages/NotFound/NotFound';
 import './DepartmentsList.scss';
@@ -29,7 +31,11 @@ const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
               <Link to={`/departments/${department._id}`} className="Departments__btn--link">
                 <Button color="success">Employees</Button>
               </Link>
-              <EditButton />
+              <EditButton
+                name={modalNames.EDIT_DEPARTMENT}
+                title={modalTitles.EDIT_DEPARTMENT}
+                modalForm={<DepartmentForm />}
+              />
               <DeleteButton />
             </Col>
           </Row>

@@ -37,6 +37,11 @@ interface ADD_DEPARTMENT {
   payload: Department | null;
 }
 
+interface EDIT_DEPARTMENT {
+  type: departmentsActionTypes.EDIT_DEPARTMENT;
+  payload: Department | null;
+}
+
 interface LOGIN {
   type: authActionTypes.LOGIN;
   payload: Auth;
@@ -68,6 +73,7 @@ export type ActionType =
   | FETCH_DEPARTMENTS
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
+  | EDIT_DEPARTMENT
   | LOGIN
   | OPEN_MODAL
   | CLOSE_MODAL

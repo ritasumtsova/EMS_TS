@@ -20,6 +20,12 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
         department: action.payload
       };
 
+    case departmentsActionTypes.EDIT_DEPARTMENT:
+      return {
+        ...state,
+        department: action.payload
+      };
+
     default:
       return state;
   }

@@ -26,6 +26,12 @@ const DepartmentsAPI = {
       description: data.description
     });
   },
+
+  editDepartment(data: Department): Promise<AxiosResponse<Department>> {
+    return DepartmentsAPI.CONFIG.post(`/department/${data._id}`, {
+      description: data.description
+    });
+  },
 };
 
 export default DepartmentsAPI;

@@ -5,7 +5,11 @@ import { AxiosResponse, AxiosError } from 'axios';
 import { ActionType } from '../../types/store/actionTypes';
 import { AppThunk, AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { Department, Departments } from '../../types/components/departments';
-import { addDepartmentContent, failureContent } from '../../types/components/modalsContent';
+import {
+  addDepartmentContent,
+  editDepartmentContent,
+  failureContent
+} from '../../types/components/modalsContent';
 
 import { departmentsActionTypes } from '../actionTypes/departmentsActionTypes';
 import { fetchStart, fetchEnd, fetchFailure } from './loadingActionCreators';
@@ -52,6 +56,32 @@ export const addDepartmentThunk = (data: Department): AppThunk => {
 
       dispatch(addDepartment(newDepartment));
       dispatch(openModal(modalNames.SUCCESS, addDepartmentContent));
+    } catch (error) {
+      dispatch(fetchFailure(error as AxiosError));
+      dispatch(openModal(modalNames.FAILURE, failureContent));
+    } finally {
+      dispatch(fetchEnd());
+    }
+  };
+};
+
+export const editDepartment = (department: Department): ActionType => {
+  return {
+    type: departmentsActionTypes.EDIT_DEPARTMENT,
+    payload: department
+  }
+};
+
+export const editDepartmentThunk = (data: Department): AppThunk => {
+  return async (dispatch: AppThunkDispatch): Promise<void> => {
+    dispatch(fetchStart());
+
+    try {
+      const res: AxiosResponse<Department> = await DepartmentsAPI.editDepartment(data);
+      const department: Department = res.data;
+
+      dispatch(addDepartment(department));
+      dispatch(openModal(modalNames.SUCCESS, editDepartmentContent));
     } catch (error) {
       dispatch(fetchFailure(error as AxiosError));
       dispatch(openModal(modalNames.FAILURE, failureContent));
