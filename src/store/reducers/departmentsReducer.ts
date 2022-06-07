@@ -19,6 +19,17 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
         departments: action.payload
       };
 
+    case departmentsActionTypes.GET_DEPARTMENTS_BY_NAME:
+        return {
+          ...state
+        };
+  
+      case departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME:
+        return {
+          ...state,
+          departments: action.payload?.data.length ? action.payload : null
+        };
+
     case departmentsActionTypes.ADD_DEPARTMENT:
       return {
         ...state,

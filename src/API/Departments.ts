@@ -24,6 +24,10 @@ const DepartmentsAPI = {
     return DepartmentsAPI.CONFIG.get(`/department/${id}`);
   },
 
+  getDepartmentByName(name: string): Promise<AxiosResponse<Departments>> {
+    return DepartmentsAPI.CONFIG.get(`/department?name=${name}`);
+  },
+
   addDepartment(data: Department): Promise<AxiosResponse<Department>> {
     return DepartmentsAPI.CONFIG.post('/department', {
       name: data.name,

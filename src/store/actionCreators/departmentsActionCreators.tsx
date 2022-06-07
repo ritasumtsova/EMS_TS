@@ -15,6 +15,20 @@ export const fetchDepartments = (departments: Departments): ActionType => {
   };
 };
 
+export const getDepartmentsByName = (name: string): ActionType => {
+  return {
+    type: departmentsActionTypes.GET_DEPARTMENTS_BY_NAME,
+    payload: name
+  };
+};
+
+export const fetchDepartmentsByName = (departments: Departments): ActionType => {
+  return {
+    type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME,
+    payload: departments
+  };
+};
+
 export const addDepartment = (department: Department): ActionType => {
   return {
     type: departmentsActionTypes.ADD_DEPARTMENT,

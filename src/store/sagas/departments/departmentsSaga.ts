@@ -9,8 +9,8 @@ import {
 } from '../../actionCreators/loadingActionCreators';
 import { departmentsActionTypes } from '../../actionTypes/departmentsActionTypes';
 import { Department, Departments } from '../../../types/components/departments';
-import { fetchDepartments, fetchNewDepartment, fetchUpdatedDepartment } from '../../actionCreators/departmentsActionCreators';
-import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT } from '../../../types/store/actionTypes';
+import { fetchDepartments, fetchDepartmentsByName, fetchNewDepartment, fetchUpdatedDepartment } from '../../actionCreators/departmentsActionCreators';
+import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT, GET_DEPARTMENTS_BY_NAME } from '../../../types/store/actionTypes';
 import { fetchDepartmentById } from '../../actionCreators/departmentActionCreators';
 import { departmentActionTypes } from '../../actionTypes/departmentActionTypes';
 import { modalNames } from '../../../types/components/modals';
@@ -34,6 +34,23 @@ function* getDepartmentsWorker() {
   }
 }
 
+function* getDepartmentsByNameWorker(action: GET_DEPARTMENTS_BY_NAME) {
+  yield put(fetchStart());
+
+  try {
+    const res: AxiosResponse<Departments> = yield call(DepartmentsAPI.getDepartmentByName, action.payload);
+    const departments: Departments = res.data;
+    console.log(res);
+
+    yield put(fetchDepartmentsByName(departments));
+  } catch (error) {
+    console.log(error);
+    yield put(fetchFailure(error as AxiosError));
+  } finally {
+    yield put(fetchEnd());
+  }
+}
+
 function* getDepartmentByIdWorker(action: GET_DEPARTMENT_BY_ID) {
   yield put(fetchStart());
 
@@ -50,7 +67,6 @@ function* getDepartmentByIdWorker(action: GET_DEPARTMENT_BY_ID) {
 }
 
 function* addDepartmentWorker(action: ADD_DEPARTMENT) {
-  console.log(action.payload);
   yield put(fetchStart());
 
   try {
@@ -68,7 +84,6 @@ function* addDepartmentWorker(action: ADD_DEPARTMENT) {
 }
 
 function* editDepartmentWorker(action: EDIT_DEPARTMENT) {
-  console.log(action.payload);
   yield put(fetchStart());
 
   try {
@@ -87,6 +102,7 @@ function* editDepartmentWorker(action: EDIT_DEPARTMENT) {
 
 export function* departmentsSaga() {
   yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS, getDepartmentsWorker);
+  yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS_BY_NAME, getDepartmentsByNameWorker);
   yield takeEvery(departmentActionTypes.GET_DEPARTMENT_BY_ID, getDepartmentByIdWorker);
   yield takeEvery(departmentsActionTypes.ADD_DEPARTMENT, addDepartmentWorker);
   yield takeEvery(departmentsActionTypes.EDIT_DEPARTMENT, editDepartmentWorker);

@@ -23,12 +23,22 @@ interface FETCH_FAILURE {
   payload: string;
 }
 
-interface GET_DEPARTMENTS {
+export interface GET_DEPARTMENTS {
   type: departmentsActionTypes.GET_DEPARTMENTS;
 }
 
 interface FETCH_DEPARTMENTS {
   type: departmentsActionTypes.FETCH_DEPARTMENTS;
+  payload: Departments | null;
+}
+
+export interface GET_DEPARTMENTS_BY_NAME {
+  type: departmentsActionTypes.GET_DEPARTMENTS_BY_NAME;
+  payload: string;
+}
+
+interface FETCH_DEPARTMENTS_BY_NAME {
+  type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME;
   payload: Departments | null;
 }
 
@@ -102,6 +112,8 @@ export type ActionType =
   | FETCH_FAILURE
   | GET_DEPARTMENTS
   | FETCH_DEPARTMENTS
+  | GET_DEPARTMENTS_BY_NAME
+  | FETCH_DEPARTMENTS_BY_NAME
   | GET_DEPARTMENT_BY_ID
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
