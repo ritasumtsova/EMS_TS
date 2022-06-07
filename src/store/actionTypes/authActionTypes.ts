@@ -1,3 +1,4 @@
 export enum authActionTypes {
-  LOGIN = 'LOGIN'
+  FETCH_LOGIN = 'FETCH_LOGIN',
+  FETCH_TOKEN = 'FETCH_TOKEN'
 };

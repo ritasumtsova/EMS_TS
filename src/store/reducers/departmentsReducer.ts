@@ -8,6 +8,11 @@ const initState: DepartmentsInitState = {
 
 const departmentsReducer = (state: DepartmentsInitState = initState, action: ActionType) => {
   switch(action.type) {
+    case departmentsActionTypes.GET_DEPARTMENTS:
+      return {
+        ...state
+      };
+
     case departmentsActionTypes.FETCH_DEPARTMENTS:
       return {
         ...state,
@@ -18,6 +23,12 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
       return {
         ...state,
         department: [...state.departments?.data!, action.payload]
+      };
+
+    case departmentsActionTypes.FETCH_NEW_DEPARTMENT:
+      return {
+        ...state,
+        departments: [...state.departments?.data!, action.payload]
       };
 
     default:

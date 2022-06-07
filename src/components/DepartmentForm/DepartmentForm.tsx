@@ -7,9 +7,8 @@ import React, {
 import { useDispatch } from 'react-redux';
 import { Form, Input, Button, Row } from 'reactstrap';
 import { Department } from '../../types/components/departments';
-import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { addDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
+import { addDepartment } from '../../store/actionCreators/departmentsActionCreators';
 import './DepartmentForm.scss';
 
 const DepartmentForm: React.FC = () => {
@@ -18,7 +17,6 @@ const DepartmentForm: React.FC = () => {
   const nameRef = useRef<HTMLInputElement | null>(null);
   
   const dispatch = useDispatch();
-  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
   const submitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,9 +26,9 @@ const DepartmentForm: React.FC = () => {
         name,
         description
       };
-      
-      thunkDispatch(addDepartmentThunk(data));
-    }, [thunkDispatch]
+      console.log(data);
+      dispatch(addDepartment(data));
+    }, [name, description]
   );
 
   useEffect(() => {

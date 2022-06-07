@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
-import { loginThunk } from '../../../store/actionCreators/authActionCreators';
+import { fetchLogin } from '../../../store/actionCreators/authActionCreators';
 import { authSelector } from '../../../store/selectors/auth';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
@@ -18,9 +18,10 @@ import NotFound from '../NotFound/NotFound';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 import './Login.scss';
+import { UserData } from '../../../types/components/auth';
 
 const Login: React.FC = () => {
-  const [login, setLogin] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const { token } = useSelector(authSelector);
@@ -30,7 +31,13 @@ const Login: React.FC = () => {
 
   const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginThunk(login, password));
+
+    const userData: UserData = {
+      userName,
+      password
+    };
+    
+    dispatch(fetchLogin(userData));
   };
 
   if (loading) {
@@ -60,8 +67,8 @@ const Login: React.FC = () => {
               name="login"
               id="login"
               placeholder="Login"
-              value={login}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogin(e.target.value)}
+              value={userName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
             />
           </FormGroup>
           <FormGroup>
