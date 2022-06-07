@@ -26,7 +26,7 @@ const DepartmentForm: React.FC = () => {
         name,
         description
       };
-      console.log(data);
+
       dispatch(addDepartment(data));
     }, [name, description]
   );

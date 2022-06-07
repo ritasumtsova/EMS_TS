@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
 import { getDepartments, addDepartment } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
@@ -18,7 +17,7 @@ const Departments: React.FC = () => {
   const { departments } = departmentsInfo;
   const { loading, errorMessage } = useSelector(loadingSelector);
 
-  const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useDispatch();
 
   const departmentsList = useMemo(() => {
     return dispatch(getDepartments());

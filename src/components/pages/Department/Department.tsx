@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 
-import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { getDepartmentById } from '../../../store/actionCreators/departmentActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
@@ -24,7 +23,7 @@ const DepartmentPage: React.FC = () => {
   const { department } = departmentById;
   const { loading, errorMessage } = useSelector(loadingSelector);
 
-  const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useDispatch();
 
   const departmentInfo = useMemo(() => {
     return dispatch(getDepartmentById(id!));

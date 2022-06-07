@@ -9,7 +9,6 @@ import {
   Container,
 } from 'reactstrap';
 
-import { AppThunkDispatch } from '../../../types/store/appThunkTypes';
 import { fetchLogin } from '../../../store/actionCreators/authActionCreators';
 import { authSelector } from '../../../store/selectors/auth';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
@@ -27,7 +26,7 @@ const Login: React.FC = () => {
   const { token } = useSelector(authSelector);
   const { errorMessage, loading } = useSelector(loadingSelector);
 
-  const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useDispatch();
 
   const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
