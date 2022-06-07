@@ -1,9 +1,13 @@
+import { ActionType } from './../store/actionTypes';
+import { Department } from './departments';
+
 export interface ModalWindowContent {
   name: string;
   title: string;
   modalForm:  React.ReactNode;
   departmentId?: string;
   employeeId?: string;
+  submitHandler?: (data: Department) => ActionType;
 }
 
 export enum modalNames {

@@ -1,19 +1,17 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Button, Container } from 'reactstrap';
-import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { deleteDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
 import { useSelector } from 'react-redux';
 import { modalsSelector } from '../../store/selectors/modals';
-import { deleteEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
+import { deleteEmployee } from '../../store/actionCreators/employeesActionCreators';
+import { deleteDepartment } from '../../store/actionCreators/departmentsActionCreators';
 
 const ConfirmModal: React.FC = () => {
   const { content } = useSelector(modalsSelector);
   const currentModalContent = content.at(-1);
 
   const dispatch = useDispatch();
-  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
   const submitHandler = useCallback(
     () => {
@@ -23,11 +21,11 @@ const ConfirmModal: React.FC = () => {
           employeeId: currentModalContent.employeeId
         };
 
-        thunkDispatch(deleteEmployeeThunk(data))
+        dispatch(deleteEmployee(data))
       } else {
-        thunkDispatch(deleteDepartmentThunk(currentModalContent?.departmentId!));
+        dispatch(deleteDepartment(currentModalContent?.departmentId!));
       }
-    }, [thunkDispatch]
+    }, [dispatch]
   )
 
   return (

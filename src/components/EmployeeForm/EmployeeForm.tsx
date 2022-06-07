@@ -1,9 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Input, Row, Button } from 'reactstrap';
-import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { addEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
+import { addEmployee } from '../../store/actionCreators/employeesActionCreators';
 import { Employee } from '../../types/components/employees';
 import './EmployeeForm.scss';
 
@@ -17,7 +16,6 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
   const userName = useRef<HTMLInputElement | null>(null);
   const email = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
-  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
   const submitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,8 +29,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
         email: email!.current!.value
       };
       
-      thunkDispatch(addEmployeeThunk(data));
-    }, [thunkDispatch]
+      dispatch(addEmployee(data));
+    }, [dispatch]
   )
 
   return (

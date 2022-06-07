@@ -8,6 +8,11 @@ const initState: DepartmentsInitState = {
 
 const departmentsReducer = (state: DepartmentsInitState = initState, action: ActionType) => {
   switch(action.type) {
+    case departmentsActionTypes.GET_DEPARTMENTS:
+      return {
+        ...state
+      };
+
     case departmentsActionTypes.FETCH_DEPARTMENTS:
       return {
         ...state,
@@ -20,13 +25,25 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
         department: action.payload
       };
 
+    case departmentsActionTypes.FETCH_NEW_DEPARTMENT:
+      return {
+        ...state,
+        departments: [...state.departments?.data!, action.payload]
+      };
+
     case departmentsActionTypes.DELETE_DEPARTMENT:
-        return {
-          ...state,
-          departments: state.departments?.data.filter((department) =>{
-            return department._id !== action.payload;
-          })
-        };
+      return {
+        ...state,
+        id: action.payload
+      };
+
+    case departmentsActionTypes.FETCH_DELETED_DEPARTMENT:
+      return {
+        ...state,
+        departments: state.departments?.data.filter((department) =>{
+          return department._id !== action.payload;
+        })
+      }; 
 
     default:
       return state;

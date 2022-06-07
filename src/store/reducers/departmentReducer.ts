@@ -3,11 +3,18 @@ import { departmentActionTypes } from '../actionTypes/departmentActionTypes';
 import { DepartmentInitState } from "../../types/store/initStateInterfaces";
 
 const initState: DepartmentInitState = {
-  department: null
+  department: null,
+  id: ''
 };
 
 const departmentReducer = (state: DepartmentInitState = initState, action: ActionType) => {
   switch(action.type) {
+    case departmentActionTypes.GET_DEPARTMENT_BY_ID:
+      return {
+        ...state,
+        id: action.payload
+      };
+
     case departmentActionTypes.FETCH_DEPARTMENT_BY_ID:
       return {
         ...state,

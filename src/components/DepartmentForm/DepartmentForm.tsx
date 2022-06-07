@@ -4,7 +4,7 @@ import { Form, Input, Button, Row } from 'reactstrap';
 import { Department } from '../../types/components/departments';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { addDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
+import { addDepartment } from '../../store/actionCreators/departmentsActionCreators';
 import './DepartmentForm.scss';
 
 const DepartmentForm: React.FC = () => {
@@ -22,7 +22,7 @@ const DepartmentForm: React.FC = () => {
         description: descritpionRef!.current!.value
       };
       
-      thunkDispatch(addDepartmentThunk(data));
+      thunkDispatch(addDepartment(data));
     }, [thunkDispatch]
   );
 
