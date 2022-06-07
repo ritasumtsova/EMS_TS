@@ -13,7 +13,7 @@ const EmployeesAPI = {
   }),
 
   addEmployee(data: Employee): Promise<AxiosResponse<Employee>> {
-    return EmployeesAPI.CONFIG.post('/department', {
+    return EmployeesAPI.CONFIG.post(`/employee/department/${data._id}`, {
       userName: data.userName,
       email: data.email,
       firstName: data.firstName,

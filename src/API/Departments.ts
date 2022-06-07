@@ -20,10 +20,10 @@ const DepartmentsAPI = {
     return DepartmentsAPI.CONFIG.get(`/department/${id}`);
   },
 
-  addDepartment(name: string, description: string): Promise<AxiosResponse<Department>> {
+  addDepartment(data: Department): Promise<AxiosResponse<Department>> {
     return DepartmentsAPI.CONFIG.post('/department', {
-      name,
-      description,
+      name: data.name,
+      description: data.description
     });
   },
 };

@@ -11,10 +11,11 @@ import NotFound from '../NotFound/NotFound';
 import DepartmnetsList from '../../DepartmentsList/DepartmentsList';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import DepartmentForm from '../../DepartmentForm/DepartmentForm';
+import { modalNames, modalTitles } from '../../../types/components/modals';
 
 const Departments: React.FC = () => {
   const { departmentsInfo } = useSelector(departmentsSelector);
-  const {  departments } = departmentsInfo;
+  const { departments } = departmentsInfo;
   const { loading, errorMessage } = useSelector(loadingSelector);
 
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -35,7 +36,11 @@ const Departments: React.FC = () => {
 
   return (
     <>
-      <AddButton name="Add department" title="Add department " modalForm={<DepartmentForm />}/>
+      <AddButton
+        name={modalNames.ADD_DEPARTMENT}
+        title={modalTitles.ADD_DEPARTMENT}
+        modalForm={<DepartmentForm />}
+      />
       <DepartmnetsList departments={departments?.data || []} />
     </>
   );
