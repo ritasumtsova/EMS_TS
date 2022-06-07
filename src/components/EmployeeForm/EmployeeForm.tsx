@@ -1,4 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Input, Row, Button } from 'reactstrap';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
@@ -18,7 +23,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
   const [email, setEmail] = useState('');
 
   const firstNameRef = useRef<HTMLInputElement | null>(null);
-  
+
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();
 
@@ -36,8 +41,12 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
       
       thunkDispatch(addEmployeeThunk(data));
     }, [thunkDispatch]
-  )
+  );
 
+  useEffect(() => {
+    firstNameRef.current?.focus();
+  });
+  
   return (
     <Form className="EmployeeForm" onSubmit={submitHandler}>
       <Input
