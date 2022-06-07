@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Input, Button, Row } from 'reactstrap';
 import { Department } from '../../types/components/departments';
@@ -8,8 +13,10 @@ import { addDepartmentThunk } from '../../store/actionCreators/departmentsAction
 import './DepartmentForm.scss';
 
 const DepartmentForm: React.FC = () => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const nameRef = useRef<HTMLInputElement | null>(null);
-  const descritpionRef = useRef<HTMLInputElement | null>(null);
+  
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();
 
@@ -18,8 +25,8 @@ const DepartmentForm: React.FC = () => {
       e.preventDefault();
       
       const data: Department = {
-        name: nameRef!.current!.value,
-        description: descritpionRef!.current!.value
+        name,
+        description
       };
       
       thunkDispatch(addDepartmentThunk(data));
@@ -34,15 +41,18 @@ const DepartmentForm: React.FC = () => {
     <Form className="DepartmentForm" onSubmit={submitHandler}>
       <Input
         innerRef={nameRef}
+        value={name}
         className="DepartmentForm__input"
         type="text"
         placeholder="Name"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
       />
       <Input
-        innerRef={descritpionRef}
+        value={description}
         className="DepartmentForm__input"
         type="text"
         placeholder="Description"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
       />
       <Row className="DepartmentForm__footer">
         <Button
