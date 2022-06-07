@@ -45,7 +45,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
 
   useEffect(() => {
     firstNameRef.current?.focus();
-  });
+  }, []);
   
   return (
     <Form className="EmployeeForm" onSubmit={submitHandler}>

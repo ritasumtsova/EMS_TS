@@ -35,7 +35,7 @@ const DepartmentForm: React.FC = () => {
 
   useEffect(() => {
     nameRef.current?.focus();
-  })
+  }, [])
 
   return (
     <Form className="DepartmentForm" onSubmit={submitHandler}>
