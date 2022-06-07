@@ -9,7 +9,6 @@ import {
 } from 'reactstrap';
 import { modalsSelector } from '../../store/selectors/modals';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { formsSelector } from '../../store/selectors/formsSelectors';
 import { modalNames } from '../../types/components/modals';
 import { Department } from '../../types/components/departments';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
@@ -17,7 +16,6 @@ import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 const ModalWindow: React.FC = () => {
   const { content, open } = useSelector(modalsSelector);
   const currentModalContent = content.at(-1);
-  const { name, description } = useSelector(formsSelector);
 
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();

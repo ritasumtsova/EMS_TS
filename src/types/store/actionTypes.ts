@@ -1,4 +1,3 @@
-import { formsActionTypes } from './../../store/actionTypes/formsActionTypes';
 import { loadingActionTypes } from '../../store/actionTypes/loadingActionTypes';
 import { departmentsActionTypes } from '../../store/actionTypes/departmentsActionTypes';
 import { departmentActionTypes } from '../../store/actionTypes/departmentActionTypes';
@@ -21,9 +20,18 @@ interface FETCH_FAILURE {
   payload: string;
 }
 
+interface GET_DEPARTMENTS {
+  type: departmentsActionTypes.GET_DEPARTMENTS;
+}
+
 interface FETCH_DEPARTMENTS {
   type: departmentsActionTypes.FETCH_DEPARTMENTS;
   payload: Departments | null;
+}
+
+export interface GET_DEPARTMENT_BY_ID {
+  type: departmentActionTypes.GET_DEPARTMENT_BY_ID;
+  payload: string;
 }
 
 interface FETCH_DEPARTMENT_BY_ID {
@@ -31,8 +39,13 @@ interface FETCH_DEPARTMENT_BY_ID {
   payload: Department | null;
 }
 
-interface ADD_DEPARTMENT {
+export interface ADD_DEPARTMENT {
   type: departmentsActionTypes.ADD_DEPARTMENT;
+  payload: Department | null;
+}
+
+interface FETCH_NEW_DEPARTMENT {
+  type: departmentsActionTypes.FETCH_NEW_DEPARTMENT;
   payload: Department | null;
 }
 
@@ -58,26 +71,17 @@ interface CLOSE_MODAL {
   payload?: ModalWindowContent;
 }
 
-interface CHANGE_DEPARTMENT_NAME {
-  type: formsActionTypes.CHANGE_DEPARTMENT_NAME;
-  payload: string;
-}
-
-interface CHANGE_DEPARTMENT_DESCRIPTION {
-  type: formsActionTypes.CHANGE_DEPARTMENT_DESCRIPTION;
-  payload: string;
-}
-
 export type ActionType =
   FETCH_START
   | FETCH_END
   | FETCH_FAILURE
+  | GET_DEPARTMENTS
   | FETCH_DEPARTMENTS
+  | GET_DEPARTMENT_BY_ID
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
+  | FETCH_NEW_DEPARTMENT
   | FETCH_LOGIN
   | FETCH_TOKEN
   | OPEN_MODAL
-  | CLOSE_MODAL
-  | CHANGE_DEPARTMENT_NAME
-  | CHANGE_DEPARTMENT_DESCRIPTION;
+  | CLOSE_MODAL;

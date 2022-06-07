@@ -9,6 +9,7 @@ export interface DepartmentsInitState {
 
 export interface DepartmentInitState {
   department: null | Department;
+  id: string;
 }
 
 export interface AuthInitState {

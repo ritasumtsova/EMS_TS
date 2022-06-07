@@ -1,11 +1,11 @@
-import { AppThunk } from './../store/appThunkTypes';
+import { ActionType } from './../store/actionTypes';
 import { Department } from './departments';
 
 export interface ModalWindowContent {
   name: string;
   title: string;
   modalForm:  React.ReactNode;
-  submitHandler?: (data: Department) => AppThunk;
+  submitHandler?: (data: Department) => ActionType;
 }
 
 export enum modalNames {

@@ -2,10 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppThunkDispatch } from '../../../types/store/appThunkTypes'
-import {
-  fetchDepartmentsThunk,
-  addDepartmentThunk
-} from '../../../store/actionCreators/departmentsActionCreators';
+import { getDepartments, addDepartment } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
@@ -24,7 +21,7 @@ const Departments: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
 
   const departmentsList = useMemo(() => {
-    return dispatch(fetchDepartmentsThunk());
+    return dispatch(getDepartments());
   }, []);
 
   useEffect(() => {}, [departmentsList]);
@@ -40,7 +37,7 @@ const Departments: React.FC = () => {
   return (
     <>
       <AddButton
-        submitHandler={addDepartmentThunk}
+        submitHandler={addDepartment}
         name={modalNames.ADD_DEPARTMENT}
         title="Add department "
         modalForm={<DepartmentForm />}

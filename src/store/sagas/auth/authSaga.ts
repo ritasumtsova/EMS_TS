@@ -16,7 +16,6 @@ const call: any = Effects.call;
 
 function* authWorker(action: FETCH_LOGIN) {
   yield put(fetchStart());
-  console.log(action.payload);
 
   try {
     const res: AxiosResponse<Auth> = yield call(AuthAPI.login, action.payload);
