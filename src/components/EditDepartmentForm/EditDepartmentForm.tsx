@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Row } from 'reactstrap';
-import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { editDepartmentThunk } from '../../store/actionCreators/departmentsActionCreators';
+import { editDepartment } from '../../store/actionCreators/departmentsActionCreators';
 import { modalsSelector } from '../../store/selectors/modals';
 
 const EditDepartmentForm: React.FC = () => {
@@ -13,7 +12,6 @@ const EditDepartmentForm: React.FC = () => {
   const department = content.at(-1);
 
   const dispatch = useDispatch();
-  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
   const submitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,8 +22,8 @@ const EditDepartmentForm: React.FC = () => {
         description: descritpionRef!.current!.value
       };
       
-      thunkDispatch(editDepartmentThunk(data));
-    }, [thunkDispatch]
+      dispatch(editDepartment(data));
+    }, [dispatch]
   );
 
   useEffect(() => {
