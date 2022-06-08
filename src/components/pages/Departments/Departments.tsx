@@ -36,7 +36,6 @@ const Departments: React.FC = () => {
   return (
     <>
       <AddButton
-        submitHandler={addDepartment}
         name={modalNames.ADD_DEPARTMENT}
         title={modalTitles.ADD_DEPARTMENT}
         modalForm={<DepartmentForm />}
