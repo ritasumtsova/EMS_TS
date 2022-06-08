@@ -33,6 +33,7 @@ const SearchForm: React.FC = () => {
         <Button
           className="SearchForm__btn-button"
           color="primary"
+          type="submit"
         >
           Search
         </Button>
