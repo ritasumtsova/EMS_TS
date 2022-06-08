@@ -1,4 +1,9 @@
-import React, { useCallback, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Row, Button } from 'reactstrap';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
@@ -8,12 +13,13 @@ import { UpdateEmployee } from '../../types/components/employees';
 import { modalsSelector } from '../../store/selectors/modals';
 
 const EditEmployeeForm: React.FC = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const firstNameRef = useRef<HTMLInputElement | null>(null);
+
   const { content } = useSelector(modalsSelector);
   const currentModalContent = content.at(-1);
-  
-  const firstName = useRef<HTMLInputElement | null>(null);
-  const lastName = useRef<HTMLInputElement | null>(null);
-  const email = useRef<HTMLInputElement | null>(null);
   
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();
@@ -25,34 +31,42 @@ const EditEmployeeForm: React.FC = () => {
       const data: UpdateEmployee = {
         departmentId: currentModalContent?.departmentId!,
         employeeId: currentModalContent?.employeeId!,
-        firstName: firstName!.current!.value,
-        lastName: lastName!.current!.value,
-        email: email!.current!.value
+        firstName,
+        lastName,
+        email
       };
       
       thunkDispatch(editEmployeeThunk(data));
     }, [thunkDispatch]
-  )
+  );
+  
+  useEffect(() => {
+    firstNameRef.current?.focus();
+  }, []);
 
   return (
     <Form className="EmployeeForm" onSubmit={submitHandler}>
       <Input
-        innerRef={firstName}
+        value={firstName}
+        innerRef={firstNameRef}
         className="EmployeeForm__input"
         type="text"
         placeholder="First name"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
       />
       <Input
-        innerRef={lastName}
+        value={lastName}
         className="EmployeeForm__input"
         type="text"
         placeholder="Last name"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
       />
       <Input
-        innerRef={email}
+        value={email}
         className="EmployeeForm__input"
         type="email"
         placeholder="Email"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
       />
       <Row className="EmployeeForm__footer">
         <Button
