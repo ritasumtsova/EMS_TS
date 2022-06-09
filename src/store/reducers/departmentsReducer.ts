@@ -35,7 +35,6 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
       };
 
     case departmentsActionTypes.GET_DEPARTMENTS_BY_LIMIT:
-      console.log(action.payload);
       return {
         ...state,
         currentPage: action.payload.currentPage

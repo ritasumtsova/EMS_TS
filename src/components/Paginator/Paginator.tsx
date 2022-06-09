@@ -21,11 +21,13 @@ const Paginator: React.FC= () => {
     pagesCount.push(i);
   };
 
-  const changePage = (e: any) => {
+  const changePage = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
     const data = {
-      offset: (departmentsPerPage * +e.target.text) - departmentsPerPage,
+      offset: (departmentsPerPage * +(e.target as HTMLElement).innerHTML) - departmentsPerPage,
       limit: departmentsPerPage,
-      currentPage: +e.target.text
+      currentPage: +(e.target as HTMLElement).innerHTML
     };
 
     dispatch(getDepartmentsByLimit(data));
