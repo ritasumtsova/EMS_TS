@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
-
-import { Employee } from '../types/components/employees';
+import { Employee, UpdateEmployee } from '../types/components/employees';
 
 const axios = require('axios');
 
@@ -20,6 +19,15 @@ const EmployeesAPI = {
       lastName: data.lastName
     });
   },
+
+  editEmployee(data: UpdateEmployee): Promise<AxiosResponse> {
+    return EmployeesAPI.CONFIG.patch(`employee/${data.employeeId}`,
+    {
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName
+    });
+  }
 };
 
 export default EmployeesAPI;

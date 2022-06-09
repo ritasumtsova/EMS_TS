@@ -1,5 +1,4 @@
-import * as Effects from 'redux-saga/effects';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { AxiosResponse, AxiosError } from 'axios';
 import AuthAPI from '../../../API/Auth';
 import {
@@ -12,13 +11,13 @@ import { authActionTypes } from '../../actionTypes/authActionTypes';
 import { FETCH_LOGIN } from './../../../types/store/actionTypes';
 import { Auth } from '../../../types/components/auth';
 
-const call: any = Effects.call;
+const callEffect: any = call;
 
 function* authWorker(action: FETCH_LOGIN) {
   yield put(fetchStart());
 
   try {
-    const res: AxiosResponse<Auth> = yield call(AuthAPI.login, action.payload);
+    const res: AxiosResponse<Auth> = yield callEffect(AuthAPI.login, action.payload);
     const auth: Auth = res.data;
     
     yield put(fetchToken(auth));

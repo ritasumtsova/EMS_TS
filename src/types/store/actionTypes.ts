@@ -1,3 +1,4 @@
+import { EditDepartment } from './../components/departments';
 import { Employee } from './../components/employees';
 import { loadingActionTypes } from '../../store/actionTypes/loadingActionTypes';
 import { departmentsActionTypes } from '../../store/actionTypes/departmentsActionTypes';
@@ -22,7 +23,7 @@ interface FETCH_FAILURE {
   payload: string;
 }
 
-interface GET_DEPARTMENTS {
+export interface GET_DEPARTMENTS {
   type: departmentsActionTypes.GET_DEPARTMENTS;
 }
 
@@ -48,6 +49,16 @@ export interface ADD_DEPARTMENT {
 
 interface FETCH_NEW_DEPARTMENT {
   type: departmentsActionTypes.FETCH_NEW_DEPARTMENT;
+  payload: Department | null;
+}
+
+export interface EDIT_DEPARTMENT {
+  type: departmentsActionTypes.EDIT_DEPARTMENT;
+  payload: EditDepartment | null;
+}
+
+interface FETCH_UPDATED_DEPARTMENT {
+  type: departmentsActionTypes.FETCH_UPDATED_DEPARTMENT;
   payload: Department | null;
 }
 
@@ -80,6 +91,11 @@ interface ADD_EMPLOYEE {
   payload: Employee | null;
 }
 
+interface EDIT_EMPLOYEE {
+  type: employeesActionTypes.EDIT_EMPLOYEE;
+  payload: Employee | null;
+}
+
 export type ActionType =
   FETCH_START
   | FETCH_END
@@ -90,9 +106,12 @@ export type ActionType =
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
   | FETCH_NEW_DEPARTMENT
+  | EDIT_DEPARTMENT
+  | FETCH_UPDATED_DEPARTMENT
   | FETCH_LOGIN
   | FETCH_TOKEN
   | OPEN_MODAL
   | CLOSE_MODAL
   | CLOSE_ALL_MODALS
-  | ADD_EMPLOYEE;
+  | ADD_EMPLOYEE
+  | EDIT_EMPLOYEE;

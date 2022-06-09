@@ -3,5 +3,12 @@ export interface Employee {
   email: string;
   firstName: string;
   lastName: string;
-  userName: string;
+  userName?: string;
+}
+
+export interface UpdateEmployee {
+  employeeId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 }

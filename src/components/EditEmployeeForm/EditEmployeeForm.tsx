@@ -4,26 +4,23 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Row, Button } from 'reactstrap';
 import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { addEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
-import { Employee } from '../../types/components/employees';
-import './EmployeeForm.scss';
+import { editEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
+import { UpdateEmployee } from '../../types/components/employees';
+import { modalsSelector } from '../../store/selectors/modals';
 
-interface EmployeeFormProps {
-  id: string;
-}
-
-const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
+const EditEmployeeForm: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-
   const firstNameRef = useRef<HTMLInputElement | null>(null);
 
+  const { content } = useSelector(modalsSelector);
+  const currentModalContent = content.at(-1);
+  
   const dispatch = useDispatch();
   const thunkDispatch = useDispatch<AppThunkDispatch>();
 
@@ -31,27 +28,26 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const data: Employee = {
-        _id: id,
+      const data: UpdateEmployee = {
+        employeeId: currentModalContent?.employeeId!,
         firstName,
         lastName,
-        userName,
         email
       };
       
-      thunkDispatch(addEmployeeThunk(data));
-    }, [thunkDispatch]
+      thunkDispatch(editEmployeeThunk(data));
+    }, [firstName, lastName, email]
   );
-
+  
   useEffect(() => {
     firstNameRef.current?.focus();
   }, []);
-  
+
   return (
     <Form className="EmployeeForm" onSubmit={submitHandler}>
       <Input
-        innerRef={firstNameRef}
         value={firstName}
+        innerRef={firstNameRef}
         className="EmployeeForm__input"
         type="text"
         placeholder="First name"
@@ -63,13 +59,6 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
         type="text"
         placeholder="Last name"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
-      />
-      <Input
-        value={userName}
-        className="EmployeeForm__input"
-        type="text"
-        placeholder="Username"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
       />
       <Input
         value={email}
@@ -96,4 +85,4 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ id }) => {
   );
 };
 
-export default EmployeeForm;
+export default EditEmployeeForm;

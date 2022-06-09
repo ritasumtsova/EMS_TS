@@ -9,4 +9,10 @@ export interface Department {
 
 export interface Departments {
   data: Array<Department>;
+  count: number;
+}
+
+export interface EditDepartment {
+  _id: string;
+  description: string;
 }
