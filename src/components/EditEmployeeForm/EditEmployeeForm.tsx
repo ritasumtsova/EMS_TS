@@ -6,10 +6,9 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Row, Button } from 'reactstrap';
-import { AppThunkDispatch } from '../../types/store/appThunkTypes';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { editEmployeeThunk } from '../../store/actionCreators/employeesActionCreators';
-import { UpdateEmployee } from '../../types/components/employees';
+import { editEmployee } from '../../store/actionCreators/employeesActionCreators';
+import { EditEmployee } from '../../types/components/employees';
 import { modalsSelector } from '../../store/selectors/modals';
 
 const EditEmployeeForm: React.FC = () => {
@@ -22,20 +21,19 @@ const EditEmployeeForm: React.FC = () => {
   const currentModalContent = content.at(-1);
   
   const dispatch = useDispatch();
-  const thunkDispatch = useDispatch<AppThunkDispatch>();
 
   const submitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const data: UpdateEmployee = {
-        employeeId: currentModalContent?.employeeId!,
+      const data: EditEmployee = {
+        _id: currentModalContent!.employeeId!,
         firstName,
         lastName,
         email
       };
       
-      thunkDispatch(editEmployeeThunk(data));
+      dispatch(editEmployee(data));
     }, [firstName, lastName, email]
   );
   

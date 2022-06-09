@@ -4,6 +4,7 @@ import { Col, Row, Button } from 'reactstrap';
 
 import { Department } from '../../types/components/departments';
 import { modalNames, modalTitles } from '../../types/components/modals';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import EditDepartmentForm from '../EditDepartmentForm/EditDepartmentForm';
@@ -37,7 +38,12 @@ const DepartmnetsList: React.FC<DepartmentsListProps> = ({ departments }) => {
                 modalForm={<EditDepartmentForm />}
                 departmentId={department._id!}
               />
-              <DeleteButton />
+              <DeleteButton
+                name={modalNames.DELETE_DEPARTMENT}
+                title={modalTitles.DELETE_DEPARTMENT}
+                modalForm={<ConfirmModal />}
+                departmentId={department._id!}
+              />
             </Col>
           </Row>
         );

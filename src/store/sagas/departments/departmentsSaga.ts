@@ -8,12 +8,12 @@ import {
 } from '../../actionCreators/loadingActionCreators';
 import { departmentsActionTypes } from '../../actionTypes/departmentsActionTypes';
 import { Department, Departments,  } from '../../../types/components/departments';
-import { fetchDepartments, fetchNewDepartment, fetchUpdatedDepartment } from '../../actionCreators/departmentsActionCreators';
-import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT } from '../../../types/store/actionTypes';
-import { fetchDepartmentById } from '../../actionCreators/departmentActionCreators';
+import { fetchDepartments, fetchNewDepartment, fetchUpdatedDepartment, fetchDeletedDepartment } from '../../actionCreators/departmentsActionCreators';
+import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT, DELETE_DEPARTMENT } from '../../../types/store/actionTypes';
 import { departmentActionTypes } from '../../actionTypes/departmentActionTypes';
+import { addDepartmentContent, editDepartmentContent, failureContent, deleteDepartmentContent } from '../../../types/components/modalsContent';
+import { fetchDepartmentById } from '../../actionCreators/departmentActionCreators';
 import { modalNames } from '../../../types/components/modals';
-import { addDepartmentContent, editDepartmentContent, failureContent } from '../../../types/components/modalsContent';
 import { openModal } from '../../actionCreators/modalsActionCreators';
 
 const callEffect: any = call;
@@ -82,9 +82,26 @@ function* editDepartmentWorker(action: EDIT_DEPARTMENT) {
   }
 }
 
+function* deleteDepartmentWorker(action: DELETE_DEPARTMENT) {
+  yield put(fetchStart());
+
+  try {
+    yield callEffect(DepartmentsAPI.deleteDepartment, action.payload);
+
+    yield put(fetchDeletedDepartment(action.payload));
+    yield put (openModal(modalNames.SUCCESS, deleteDepartmentContent));
+  } catch (error) {
+    yield put(fetchFailure(error as AxiosError));
+    yield put(openModal(modalNames.FAILURE, failureContent));
+  } finally {
+    yield put(fetchEnd());
+  }
+}
+
 export function* departmentsSaga() {
   yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS, getDepartmentsWorker);
   yield takeEvery(departmentActionTypes.GET_DEPARTMENT_BY_ID, getDepartmentByIdWorker);
   yield takeEvery(departmentsActionTypes.ADD_DEPARTMENT, addDepartmentWorker);
   yield takeEvery(departmentsActionTypes.EDIT_DEPARTMENT, editDepartmentWorker);
+  yield takeEvery(departmentsActionTypes.DELETE_DEPARTMENT, deleteDepartmentWorker);
 }

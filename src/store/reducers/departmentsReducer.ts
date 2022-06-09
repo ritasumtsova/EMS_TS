@@ -48,6 +48,20 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
         // department: [...state.departments?.data!, action.payload]
       };
 
+    case departmentsActionTypes.DELETE_DEPARTMENT:
+      return {
+        ...state,
+        id: action.payload
+      };
+
+    case departmentsActionTypes.FETCH_DELETED_DEPARTMENT:
+      return {
+        ...state,
+        departments: state.departments?.data.filter((department) =>{
+          return department._id !== action.payload;
+        })
+      }; 
+
     default:
       return state;
   }

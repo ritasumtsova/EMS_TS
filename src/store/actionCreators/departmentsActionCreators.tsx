@@ -40,5 +40,19 @@ export const fetchUpdatedDepartment = (updatedDepartment: Department): ActionTyp
   return {
     type: departmentsActionTypes.FETCH_UPDATED_DEPARTMENT,
     payload: updatedDepartment
+  };
+};
+
+export const deleteDepartment = (id: string): ActionType => {
+  return {
+    type: departmentsActionTypes.DELETE_DEPARTMENT,
+    payload: id
+  }
+};
+
+export const fetchDeletedDepartment = (id: string): ActionType => {
+  return {
+    type: departmentsActionTypes.FETCH_DELETED_DEPARTMENT,
+    payload: id
   }
 };

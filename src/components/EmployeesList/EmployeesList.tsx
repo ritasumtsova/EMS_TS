@@ -3,6 +3,7 @@ import { Col, Container } from 'reactstrap';
 
 import { Employee } from '../../types/components/employees';
 import { modalNames, modalTitles } from '../../types/components/modals';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
 import EditEmployeeForm from '../EditEmployeeForm/EditEmployeeForm';
@@ -36,7 +37,13 @@ const EmployeesList: React.FC<EmployeesListProps> = ({ departmentId, employees }
                 employeeId={employee._id}
                 departmentId={departmentId}
               />
-              <DeleteButton />
+              <DeleteButton
+                name={modalNames.DELETE_EMPLOYEE}
+                title={modalTitles.DELETE_EMPLOYEE}
+                modalForm={<ConfirmModal />}
+                employeeId={employee._id!}
+                departmentId={departmentId}
+              />
             </Col>
           </React.Fragment>
         );

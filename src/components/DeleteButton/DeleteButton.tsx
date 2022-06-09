@@ -1,12 +1,42 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
+import { openModal } from '../../store/actionCreators/modalsActionCreators';
 
-const DeleteButton: React.FC = () => {
+interface DeleteButtonProps {
+  name: string;
+  title: string;
+  modalForm: JSX.Element;
+  employeeId?: string;
+  departmentId: string;
+}
+
+const DeleteButton: React.FC<DeleteButtonProps> = ({
+  name,
+  title,
+  modalForm,
+  employeeId,
+  departmentId
+}) => {
+  const dispatch = useDispatch();
+
+  const modalContent = {
+    name,
+    title,
+    modalForm,
+    employeeId,
+    departmentId
+  };
+
+  const openModalHandler = () => {
+    dispatch(openModal(name!, modalContent));
+  };
+
   return (
     <Button
       className="DeleteButton__btn"
       color="danger"
-      disabled
+      onClick={openModalHandler}
     >
       Delete
     </Button>

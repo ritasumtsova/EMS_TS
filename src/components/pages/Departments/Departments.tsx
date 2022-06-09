@@ -20,10 +20,6 @@ const Departments: React.FC = () => {
   const dispatch = useDispatch();
 
   const departmentsList = useMemo(() => {
-    const data = {
-      offset: 0,
-      limit: 5
-    }
     return dispatch(getDepartments());
   }, []);
 

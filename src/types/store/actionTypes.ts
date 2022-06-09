@@ -1,5 +1,6 @@
 import { EditDepartment } from './../components/departments';
-import { Employee } from './../components/employees';
+import { Employee, EditEmployee } from './../components/employees';
+import { EmployeeIds } from './../components/employees';
 import { loadingActionTypes } from '../../store/actionTypes/loadingActionTypes';
 import { departmentsActionTypes } from '../../store/actionTypes/departmentsActionTypes';
 import { departmentActionTypes } from '../../store/actionTypes/departmentActionTypes';
@@ -62,6 +63,16 @@ interface FETCH_UPDATED_DEPARTMENT {
   payload: Department | null;
 }
 
+export interface DELETE_DEPARTMENT {
+  type: departmentsActionTypes.DELETE_DEPARTMENT;
+  payload: string;
+}
+
+interface FETCH_DELETED_DEPARTMENT {
+  type: departmentsActionTypes.FETCH_DELETED_DEPARTMENT;
+  payload: string;
+}
+
 export interface FETCH_LOGIN {
   type: authActionTypes.FETCH_LOGIN;
   payload: UserData;
@@ -86,14 +97,34 @@ interface CLOSE_ALL_MODALS {
   type: modalsActionTypes.CLOSE_ALL_MODALS;
 }
 
-interface ADD_EMPLOYEE {
+export interface ADD_EMPLOYEE {
   type: employeesActionTypes.ADD_EMPLOYEE;
   payload: Employee | null;
 }
 
-interface EDIT_EMPLOYEE {
-  type: employeesActionTypes.EDIT_EMPLOYEE;
+interface FETCH_NEW_EMPLOYEE {
+  type: employeesActionTypes.FETCH_NEW_EMPLOYEE;
   payload: Employee | null;
+}
+
+export interface EDIT_EMPLOYEE {
+  type: employeesActionTypes.EDIT_EMPLOYEE;
+  payload: EditEmployee | null;
+}
+
+interface FETCH_UPDATED_EMPLOYEE {
+  type: employeesActionTypes.FETCH_UPDATED_EMPLOYEE;
+  payload: Employee | null;
+}
+
+export interface DELETE_EMPLOYEE {
+  type: employeesActionTypes.DELETE_EMPLOYEE;
+  payload: EmployeeIds;
+}
+
+interface FETCH_DELETED_EMPLOYEE {
+  type: employeesActionTypes.FETCH_DELETED_EMPLOYEE;
+  payload: string;
 }
 
 export type ActionType =
@@ -108,10 +139,17 @@ export type ActionType =
   | FETCH_NEW_DEPARTMENT
   | EDIT_DEPARTMENT
   | FETCH_UPDATED_DEPARTMENT
+  | DELETE_DEPARTMENT
+  | FETCH_DELETED_DEPARTMENT
   | FETCH_LOGIN
   | FETCH_TOKEN
   | OPEN_MODAL
   | CLOSE_MODAL
   | CLOSE_ALL_MODALS
   | ADD_EMPLOYEE
-  | EDIT_EMPLOYEE;
+  | FETCH_NEW_EMPLOYEE
+  | EDIT_EMPLOYEE
+  | FETCH_UPDATED_EMPLOYEE
+  | DELETE_EMPLOYEE
+  | FETCH_DELETED_EMPLOYEE;
+

@@ -6,9 +6,14 @@ export interface Employee {
   userName?: string;
 }
 
-export interface UpdateEmployee {
-  employeeId: string;
+export interface EditEmployee {
+  _id: string;
   email: string;
   firstName: string;
   lastName: string;
+}
+
+export interface EmployeeIds {
+  departmentId: string;
+  employeeId: string;
 }
