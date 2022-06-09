@@ -6,6 +6,9 @@ import { ModalWindowContent } from '../components/modals';
 
 export interface DepartmentsInitState {
   departments: null | Departments;
+  departmentsPerPage: number;
+  totalDepartmentsCount: number;
+  currentPage: number;
 }
 
 export interface DepartmentInitState {

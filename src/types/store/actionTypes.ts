@@ -1,4 +1,4 @@
-import { EditDepartment } from './../components/departments';
+import { DepartmentsLimit, EditDepartment } from './../components/departments';
 import { Employee, EditEmployee } from './../components/employees';
 import { EmployeeIds } from './../components/employees';
 import { loadingActionTypes } from '../../store/actionTypes/loadingActionTypes';
@@ -31,6 +31,31 @@ export interface GET_DEPARTMENTS {
 interface FETCH_DEPARTMENTS {
   type: departmentsActionTypes.FETCH_DEPARTMENTS;
   payload: Departments | null;
+}
+
+export interface GET_DEPARTMENTS_BY_NAME {
+  type: departmentsActionTypes.GET_DEPARTMENTS_BY_NAME;
+  payload: string;
+}
+
+interface FETCH_DEPARTMENTS_BY_NAME {
+  type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME;
+  payload: Departments | null;
+}
+
+export interface GET_DEPARTMENTS_BY_LIMIT {
+  type: departmentsActionTypes.GET_DEPARTMENTS_BY_LIMIT;
+  payload: DepartmentsLimit;
+}
+
+ interface FETCH_DEPARTMENTS_BY_LIMIT {
+  type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_LIMIT;
+  payload: Departments;
+}
+
+export interface GET_DEPARTMENT_BY_ID {
+  type: departmentActionTypes.GET_DEPARTMENT_BY_ID;
+  payload: string;
 }
 
 export interface GET_DEPARTMENT_BY_ID {
@@ -133,6 +158,10 @@ export type ActionType =
   | FETCH_FAILURE
   | GET_DEPARTMENTS
   | FETCH_DEPARTMENTS
+  | GET_DEPARTMENTS_BY_NAME
+  | FETCH_DEPARTMENTS_BY_NAME
+  | GET_DEPARTMENTS_BY_LIMIT
+  | FETCH_DEPARTMENTS_BY_LIMIT
   | GET_DEPARTMENT_BY_ID
   | FETCH_DEPARTMENT_BY_ID
   | ADD_DEPARTMENT
