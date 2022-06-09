@@ -1,51 +1,40 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Row } from 'reactstrap';
-import { Department } from '../../types/components/departments';
 import { closeModal } from '../../store/actionCreators/modalsActionCreators';
-import { addDepartment } from '../../store/actionCreators/departmentsActionCreators';
-import './DepartmentForm.scss';
+import { editDepartment } from '../../store/actionCreators/departmentsActionCreators';
+import { modalsSelector } from '../../store/selectors/modals';
 
-const DepartmentForm: React.FC = () => {
-  const [name, setName] = useState('');
+const EditDepartmentForm: React.FC = () => {
   const [description, setDescription] = useState('');
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  
+  const descritpionRef = useRef<HTMLInputElement | null>(null);
+
+  const { content } = useSelector(modalsSelector);
+  const department = content.at(-1);
+
   const dispatch = useDispatch();
 
   const submitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      
-      const data: Department = {
-        name,
+
+      const data = {
+        _id: department?.departmentId!,
         description
       };
-
-      dispatch(addDepartment(data));
-    }, [name, description]
+      
+      dispatch(editDepartment(data));
+    }, [description]
   );
 
   useEffect(() => {
-    nameRef.current?.focus();
+    descritpionRef.current?.focus();
   }, [])
 
   return (
     <Form className="DepartmentForm" onSubmit={submitHandler}>
       <Input
-        innerRef={nameRef}
-        value={name}
-        className="DepartmentForm__input"
-        type="text"
-        placeholder="Name"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-      />
-      <Input
+        innerRef={descritpionRef}
         value={description}
         className="DepartmentForm__input"
         type="text"
@@ -70,4 +59,4 @@ const DepartmentForm: React.FC = () => {
   );
 };
 
-export default DepartmentForm;
+export default EditDepartmentForm;

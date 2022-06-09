@@ -1,4 +1,5 @@
 import { Employee } from './../components/employees';
+import { UserData } from './../components/auth';
 import { Departments, Department } from '../components/departments';
 import { Auth } from '../components/auth';
 import { ModalWindowContent } from '../components/modals';
@@ -9,10 +10,12 @@ export interface DepartmentsInitState {
 
 export interface DepartmentInitState {
   department: null | Department;
+  id: string;
 }
 
 export interface AuthInitState {
   token: null | Auth;
+  userData: UserData | null;
 }
 
 export interface ModalsInitState {

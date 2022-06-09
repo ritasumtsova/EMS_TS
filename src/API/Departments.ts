@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Department, Departments } from '../types/components/departments';
+import { Department, Departments, EditDepartment } from '../types/components/departments';
 
 const axios = require('axios');
 
@@ -25,6 +25,16 @@ const DepartmentsAPI = {
       name: data.name,
       description: data.description
     });
+  },
+
+  editDepartment(data: EditDepartment): Promise<AxiosResponse<Department>> {
+    return DepartmentsAPI.CONFIG.patch(`/department/${data._id}`, {
+      description: data.description
+    });
+  },
+
+  deleteDepartment(id: string): Promise<AxiosResponse> {
+    return DepartmentsAPI.CONFIG.delete(`/department/${id}`);
   },
 };
 

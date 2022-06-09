@@ -3,5 +3,17 @@ export interface Employee {
   email: string;
   firstName: string;
   lastName: string;
-  userName: string;
+  userName?: string;
+}
+
+export interface EditEmployee {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface EmployeeIds {
+  departmentId: string;
+  employeeId: string;
 }

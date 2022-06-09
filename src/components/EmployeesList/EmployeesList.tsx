@@ -2,16 +2,20 @@ import React from 'react';
 import { Col, Container } from 'reactstrap';
 
 import { Employee } from '../../types/components/employees';
+import { modalNames, modalTitles } from '../../types/components/modals';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import EditButton from '../EditButton/EditButton';
+import EditEmployeeForm from '../EditEmployeeForm/EditEmployeeForm';
 import NotFound from '../pages/NotFound/NotFound';
 import './EmployeesList.scss';
 
 interface EmployeesListProps {
   employees: Employee[];
+  departmentId: string;
 }
 
-const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
+const EmployeesList: React.FC<EmployeesListProps> = ({ departmentId, employees }) => {
   if (employees.length === 0) {
     return <NotFound />;
   }
@@ -26,8 +30,20 @@ const EmployeesList: React.FC<EmployeesListProps> = ({ employees }) => {
               <div>{employee.lastName}</div>
             </Col>
             <Col className="EmployeesList__info-wrapper-btn">
-              <EditButton />
-              <DeleteButton />
+              <EditButton
+                name={modalNames.EDIT_EMPLOYEE}
+                title={modalTitles.EDIT_EMPLOYEE}
+                modalForm={<EditEmployeeForm />}
+                employeeId={employee._id}
+                departmentId={departmentId}
+              />
+              <DeleteButton
+                name={modalNames.DELETE_EMPLOYEE}
+                title={modalTitles.DELETE_EMPLOYEE}
+                modalForm={<ConfirmModal />}
+                employeeId={employee._id!}
+                departmentId={departmentId}
+              />
             </Col>
           </React.Fragment>
         );
