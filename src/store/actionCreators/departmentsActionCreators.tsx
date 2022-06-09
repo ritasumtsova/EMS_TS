@@ -1,5 +1,5 @@
 import { ActionType } from '../../types/store/actionTypes';
-import { Department, Departments, EditDepartment } from '../../types/components/departments';
+import { Department, Departments, DepartmentsLimit, EditDepartment } from '../../types/components/departments';
 import { departmentsActionTypes } from './../actionTypes/departmentsActionTypes';
 
 export const getDepartments = (): ActionType => {
@@ -11,6 +11,34 @@ export const getDepartments = (): ActionType => {
 export const fetchDepartments = (departments: Departments): ActionType => {
   return {
     type: departmentsActionTypes.FETCH_DEPARTMENTS,
+    payload: departments
+  };
+};
+
+export const getDepartmentsByName = (name: string): ActionType => {
+  return {
+    type: departmentsActionTypes.GET_DEPARTMENTS_BY_NAME,
+    payload: name
+  };
+};
+
+export const getDepartmentsByLimit = (data: DepartmentsLimit): ActionType => {
+  return {
+    type: departmentsActionTypes.GET_DEPARTMENTS_BY_LIMIT,
+    payload: data
+  };
+};
+
+export const fetchDepartmentsByLimit = (data: Departments): ActionType => {
+  return {
+    type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_LIMIT,
+    payload: data
+  };
+};
+
+export const fetchDepartmentsByName = (departments: Departments): ActionType => {
+  return {
+    type: departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME,
     payload: departments
   };
 };

@@ -1,6 +1,10 @@
 import { AxiosResponse } from 'axios';
-
-import { Department, Departments, EditDepartment } from '../types/components/departments';
+import {
+  Department,
+  Departments,
+  DepartmentsLimit,
+  EditDepartment
+} from '../types/components/departments';
 
 const axios = require('axios');
 
@@ -14,6 +18,14 @@ const DepartmentsAPI = {
 
   getDepartments(): Promise<AxiosResponse<Departments>> {
     return DepartmentsAPI.CONFIG.get('/department');
+  },
+
+  getDepartmentsByLimit(data: DepartmentsLimit): Promise<AxiosResponse<Departments>> {
+    return DepartmentsAPI.CONFIG.get(`/department?offset=${data.offset}&limit=${data.limit}`);
+  },
+
+  getDepartmentByName(name: string): Promise<AxiosResponse<Departments>> {
+    return DepartmentsAPI.CONFIG.get(`/department?name=${name}`);
   },
 
   getDepartmentInfo(id: string): Promise<AxiosResponse<Department>> {

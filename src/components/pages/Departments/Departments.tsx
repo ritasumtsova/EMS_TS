@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getDepartments } from '../../../store/actionCreators/departmentsActionCreators';
+import { getDepartments, getDepartmentsByLimit } from '../../../store/actionCreators/departmentsActionCreators';
 import { departmentsSelector } from '../../../store/selectors/departments';
 import { loadingSelector } from '../../../store/selectors/loadingSelectors';
 
@@ -20,7 +20,13 @@ const Departments: React.FC = () => {
   const dispatch = useDispatch();
 
   const departmentsList = useMemo(() => {
-    return dispatch(getDepartments());
+    const data = {
+      offset: 0,
+      limit: 5,
+      currentPage: 1
+    };
+
+    return dispatch(getDepartmentsByLimit(data));
   }, []);
 
   useEffect(() => {}, [departmentsList]);

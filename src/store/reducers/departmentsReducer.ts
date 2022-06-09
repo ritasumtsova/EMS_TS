@@ -3,7 +3,10 @@ import { departmentsActionTypes } from '../actionTypes/departmentsActionTypes';
 import { DepartmentsInitState } from "../../types/store/initStateInterfaces";
 
 const initState: DepartmentsInitState = {
-  departments: null
+  departments: null,
+  departmentsPerPage: 5,
+  totalDepartmentsCount: 0,
+  currentPage: 1,
 };
 
 const departmentsReducer = (state: DepartmentsInitState = initState, action: ActionType) => {
@@ -16,8 +19,33 @@ const departmentsReducer = (state: DepartmentsInitState = initState, action: Act
     case departmentsActionTypes.FETCH_DEPARTMENTS:
       return {
         ...state,
-        departments: action.payload,
+        departments: action.payload?.data,
+        totalDepartmentsCount: action.payload?.count,
       };
+
+    case departmentsActionTypes.GET_DEPARTMENTS_BY_NAME:
+        return {
+          ...state
+        };
+  
+    case departmentsActionTypes.FETCH_DEPARTMENTS_BY_NAME:
+      return {
+        ...state,
+        departments: action.payload?.data.length ? action.payload : null
+      };
+
+    case departmentsActionTypes.GET_DEPARTMENTS_BY_LIMIT:
+      return {
+        ...state,
+        currentPage: action.payload.currentPage
+      };
+
+    case departmentsActionTypes.FETCH_DEPARTMENTS_BY_LIMIT:
+        return {
+          ...state,
+          departments: action.payload,
+          totalDepartmentsCount: action.payload?.count,
+        };
 
     case departmentsActionTypes.ADD_DEPARTMENT:
       return {

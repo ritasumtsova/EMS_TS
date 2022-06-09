@@ -16,3 +16,9 @@ export interface EditDepartment {
   _id: string;
   description: string;
 }
+
+export interface DepartmentsLimit {
+  offset: number;
+  limit: number;
+  currentPage: number;
+}

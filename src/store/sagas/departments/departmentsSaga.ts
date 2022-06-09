@@ -1,3 +1,4 @@
+import { fetchDepartmentsByLimit } from './../../actionCreators/departmentsActionCreators';
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { AxiosResponse, AxiosError } from 'axios';
 import DepartmentsAPI from '../../../API/Departments';
@@ -8,8 +9,8 @@ import {
 } from '../../actionCreators/loadingActionCreators';
 import { departmentsActionTypes } from '../../actionTypes/departmentsActionTypes';
 import { Department, Departments,  } from '../../../types/components/departments';
-import { fetchDepartments, fetchNewDepartment, fetchUpdatedDepartment, fetchDeletedDepartment } from '../../actionCreators/departmentsActionCreators';
-import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT, DELETE_DEPARTMENT } from '../../../types/store/actionTypes';
+import { fetchDepartments, fetchNewDepartment, fetchUpdatedDepartment, fetchDeletedDepartment, fetchDepartmentsByName } from '../../actionCreators/departmentsActionCreators';
+import { GET_DEPARTMENT_BY_ID, ADD_DEPARTMENT, EDIT_DEPARTMENT, DELETE_DEPARTMENT, GET_DEPARTMENTS_BY_LIMIT, GET_DEPARTMENTS_BY_NAME } from '../../../types/store/actionTypes';
 import { departmentActionTypes } from '../../actionTypes/departmentActionTypes';
 import { addDepartmentContent, editDepartmentContent, failureContent, deleteDepartmentContent } from '../../../types/components/modalsContent';
 import { fetchDepartmentById } from '../../actionCreators/departmentActionCreators';
@@ -26,6 +27,36 @@ function* getDepartmentsWorker() {
     const departments: Departments = res.data;
 
     yield put(fetchDepartments(departments));
+  } catch (error) {
+    yield put(fetchFailure(error as AxiosError));
+  } finally {
+    yield put(fetchEnd());
+  }
+}
+
+function* getDepartmentsByLimitWorker(action: GET_DEPARTMENTS_BY_LIMIT) {
+  yield put(fetchStart());
+
+  try {
+    const res: AxiosResponse<Departments> = yield callEffect(DepartmentsAPI.getDepartmentsByLimit, action.payload);
+    const departments: Departments = res.data;
+
+    yield put(fetchDepartmentsByLimit(departments));
+  } catch (error) {
+    yield put(fetchFailure(error as AxiosError));
+  } finally {
+    yield put(fetchEnd());
+  }
+}
+
+function* getDepartmentsByNameWorker(action: GET_DEPARTMENTS_BY_NAME) {
+  yield put(fetchStart());
+
+  try {
+    const res: AxiosResponse<Departments> = yield callEffect(DepartmentsAPI.getDepartmentByName, action.payload);
+    const departments: Departments = res.data;
+
+    yield put(fetchDepartmentsByName(departments));
   } catch (error) {
     yield put(fetchFailure(error as AxiosError));
   } finally {
@@ -100,6 +131,8 @@ function* deleteDepartmentWorker(action: DELETE_DEPARTMENT) {
 
 export function* departmentsSaga() {
   yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS, getDepartmentsWorker);
+  yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS_BY_LIMIT, getDepartmentsByLimitWorker);
+  yield takeEvery(departmentsActionTypes.GET_DEPARTMENTS_BY_NAME, getDepartmentsByNameWorker);
   yield takeEvery(departmentActionTypes.GET_DEPARTMENT_BY_ID, getDepartmentByIdWorker);
   yield takeEvery(departmentsActionTypes.ADD_DEPARTMENT, addDepartmentWorker);
   yield takeEvery(departmentsActionTypes.EDIT_DEPARTMENT, editDepartmentWorker);

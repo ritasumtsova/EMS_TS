@@ -11,7 +11,6 @@ const AuthAPI = {
   }),
 
   login(userData: UserData): Promise<AxiosResponse<Auth>> {
-    console.log(userData);
     return AuthAPI.CONFIG.post('user/login', {
       userName: userData.userName,
       password: userData.password
